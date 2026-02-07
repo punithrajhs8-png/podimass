@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './GradfastLanding.css';
 import ClickSpark from './ClickSpark';
+import StudyAbroadPage from './StudyAbroadPage';
 
 // ==================== SCROLL ANIMATION HOOK ====================
 const useScrollReveal = () => {
@@ -95,7 +96,7 @@ const Header: React.FC = () => {
 };
 
 // ==================== HERO ====================
-const Hero: React.FC = () => {
+const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
     return (
         <section className="hero">
             <div className="container hero-container">
@@ -112,15 +113,15 @@ const Hero: React.FC = () => {
                     </p>
 
                     <div className="hero-cta">
-                        <a href="/eligibility" className="btn btn-primary btn-lg btn-glow">
-                            <span>Check Eligibility</span>
+                        <a href="#programs" className="btn btn-primary btn-lg btn-glow">
+                            <span>Explore Programs</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </a>
-                        <a href="#programs" className="btn btn-outline btn-lg">
-                            Explore Programs
-                        </a>
+                        <button onClick={onSwitch} className="btn btn-outline btn-lg">
+                            ✈️ Study Abroad
+                        </button>
                     </div>
                 </AnimatedSection>
 
@@ -198,8 +199,6 @@ const BentoCard: React.FC<BentoCardProps> = ({
 };
 
 const Programs: React.FC = () => {
-    const [activeTab, setActiveTab] = useState<'fasttrack' | 'abroad'>('fasttrack');
-
     return (
         <section className="programs section" id="programs">
             {/* Section Glow */}
@@ -209,130 +208,58 @@ const Programs: React.FC = () => {
                 <AnimatedSection className="section-header">
                     <span className="section-tag">
                         <span className="tag-dot" />
-                        Our Programs
+                        Fast Track Programs
                     </span>
                     <h2 className="section-title">
                         A Simpler Way to
-                        <span className="gradient-text"> Become and Discover</span>
+                        <span className="gradient-text"> Accelerate Your Degree</span>
                     </h2>
                     <p className="section-subtitle">
-                        Choose from accredited fast-track programs and discover top study destinations
-                        with comprehensive support from application to arrival.
+                        Choose from accredited fast-track programs with credit transfer
+                        and university-verified pathways to graduate faster.
                     </p>
-
-                    {/* Toggle Buttons */}
-                    <div className="program-toggle">
-                        <button
-                            className={`toggle-btn ${activeTab === 'fasttrack' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('fasttrack')}
-                        >
-                            <span className="toggle-icon">🎓</span>
-                            Fast Track Degree
-                        </button>
-                        <button
-                            className={`toggle-btn ${activeTab === 'abroad' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('abroad')}
-                        >
-                            <span className="toggle-icon">✈️</span>
-                            Study Abroad
-                        </button>
-                    </div>
                 </AnimatedSection>
 
                 {/* Fast-Track Graduation Section */}
-                {activeTab === 'fasttrack' && (
-                    <div className="bento-section">
-                        <AnimatedSection className="bento-header">
-                            <div className="bento-header-icon">🎓</div>
-                            <div>
-                                <h3 className="bento-header-title">Fast-Track Graduation</h3>
-                                <p className="bento-header-subtitle">Accelerate your path to a degree</p>
-                            </div>
-                        </AnimatedSection>
-
-                        <div className="bento-grid bento-grid--graduation">
-                            <BentoCard
-                                title="Accelerated BA"
-                                description="Complete your bachelor's degree in less time with our intensive, accredited programs."
-                                features={['2-3 Year Completion', 'Fully Accredited', 'Flexible Schedule']}
-                                icon="⚡"
-                                gradient="var(--gradient-cyan)"
-                                size="large"
-                                delay={0}
-                            />
-                            <BentoCard
-                                title="Credit Transfer"
-                                description="Move your existing credits seamlessly to accelerate completion."
-                                features={['Easy Evaluation', 'Partner Universities', 'Maximum Transfer']}
-                                icon="🔄"
-                                gradient="var(--gradient-primary)"
-                                size="medium"
-                                delay={100}
-                            />
-                            <BentoCard
-                                title="Online-to-Campus"
-                                description="Start online and graduate with an on-campus experience."
-                                features={['Hybrid Learning', 'Campus Immersion', 'Global Network']}
-                                icon="💻"
-                                gradient="var(--gradient-gold)"
-                                size="medium"
-                                delay={200}
-                            />
+                <div className="bento-section">
+                    <AnimatedSection className="bento-header">
+                        <div className="bento-header-icon">🎓</div>
+                        <div>
+                            <h3 className="bento-header-title">Fast-Track Graduation</h3>
+                            <p className="bento-header-subtitle">Accelerate your path to a degree</p>
                         </div>
-                    </div>
-                )}
+                    </AnimatedSection>
 
-                {/* Study Abroad Section */}
-                {activeTab === 'abroad' && (
-                    <div className="bento-section">
-                        <AnimatedSection className="bento-header">
-                            <div className="bento-header-icon">✈️</div>
-                            <div>
-                                <h3 className="bento-header-title">Study Abroad</h3>
-                                <p className="bento-header-subtitle">Your gateway to global education</p>
-                            </div>
-                        </AnimatedSection>
-
-                        <div className="bento-grid bento-grid--abroad">
-                            <BentoCard
-                                title="United Kingdom"
-                                description="Access world-renowned universities with comprehensive UK admission support."
-                                features={['Top Universities', 'Quick Visa', 'Post-Study Work']}
-                                icon="🇬🇧"
-                                gradient="linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)"
-                                size="medium"
-                                delay={0}
-                            />
-                            <BentoCard
-                                title="Canada"
-                                description="Discover co-op programs and work-study pathways in Canada's top institutions."
-                                features={['Co-op Programs', 'PR Pathways', 'Affordable']}
-                                icon="🇨🇦"
-                                gradient="linear-gradient(135deg, #dc2626 0%, #f87171 100%)"
-                                size="medium"
-                                delay={100}
-                            />
-                            <BentoCard
-                                title="Australia"
-                                description="Experience streamlined enrollment and quality education in Australia."
-                                features={['Easy Process', 'Work Rights', 'Quality Life']}
-                                icon="🇦🇺"
-                                gradient="linear-gradient(135deg, #059669 0%, #34d399 100%)"
-                                size="medium"
-                                delay={200}
-                            />
-                            <BentoCard
-                                title="Visa & SOP"
-                                description="Get personalized document preparation and visa application support."
-                                features={['SOP Writing', 'Visa Guidance', 'Interview Prep']}
-                                icon="📋"
-                                gradient="linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)"
-                                size="medium"
-                                delay={300}
-                            />
-                        </div>
+                    <div className="bento-grid bento-grid--graduation">
+                        <BentoCard
+                            title="Accelerated BA"
+                            description="Complete your bachelor's degree in less time with our intensive, accredited programs."
+                            features={['2-3 Year Completion', 'Fully Accredited', 'Flexible Schedule']}
+                            icon="⚡"
+                            gradient="var(--gradient-cyan)"
+                            size="large"
+                            delay={0}
+                        />
+                        <BentoCard
+                            title="Credit Transfer"
+                            description="Move your existing credits seamlessly to accelerate completion."
+                            features={['Easy Evaluation', 'Partner Universities', 'Maximum Transfer']}
+                            icon="🔄"
+                            gradient="var(--gradient-primary)"
+                            size="medium"
+                            delay={100}
+                        />
+                        <BentoCard
+                            title="Online-to-Campus"
+                            description="Start online and graduate with an on-campus experience."
+                            features={['Hybrid Learning', 'Campus Immersion', 'Global Network']}
+                            icon="💻"
+                            gradient="var(--gradient-gold)"
+                            size="medium"
+                            delay={200}
+                        />
                     </div>
-                )}
+                </div>
             </div>
         </section>
     );
@@ -656,6 +583,18 @@ const Footer: React.FC = () => {
 
 // ==================== MAIN LANDING PAGE ====================
 const GradfastLanding: React.FC = () => {
+    const [currentPage, setCurrentPage] = useState<'fasttrack' | 'abroad'>('fasttrack');
+
+    const switchToAbroad = () => {
+        setCurrentPage('abroad');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const switchToFastTrack = () => {
+        setCurrentPage('fasttrack');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     return (
         <ClickSpark
             sparkColor="#dda15e"
@@ -669,11 +608,17 @@ const GradfastLanding: React.FC = () => {
             <div className="gradfast-app">
                 <Header />
                 <main>
-                    <Hero />
-                    <Programs />
-                    <Process />
-                    <Testimonials />
-                    <CTA />
+                    {currentPage === 'fasttrack' ? (
+                        <>
+                            <Hero onSwitch={switchToAbroad} />
+                            <Programs />
+                            <Process />
+                            <Testimonials />
+                            <CTA />
+                        </>
+                    ) : (
+                        <StudyAbroadPage onSwitch={switchToFastTrack} />
+                    )}
                 </main>
                 <Footer />
             </div>

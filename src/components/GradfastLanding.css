@@ -719,6 +719,11 @@
     padding-left: 3rem;
 }
 
+.process-single {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 .timeline-line {
     position: absolute;
     left: 16px;
