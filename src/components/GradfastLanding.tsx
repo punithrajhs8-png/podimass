@@ -143,12 +143,6 @@ const Hero: React.FC = () => {
                     </div>
                 </AnimatedSection>
             </div>
-
-            {/* Scroll Indicator */}
-            <div className="scroll-indicator">
-                <span>Scroll to explore</span>
-                <div className="scroll-arrow" />
-            </div>
         </section>
     );
 };
