@@ -1,47 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Gradient Background Theme - Soft Peach to Lavender */
-  --color-bg-gradient: linear-gradient(135deg, #fef3e2 0%, #fce7f3 50%, #ede9fe 100%);
-  --color-bg-primary: #fef7ed;
-  --color-bg-secondary: #fdf2f8;
-  --color-bg-tertiary: #f5f3ff;
-  --color-bg-card: rgba(255, 255, 255, 0.6);
-  --color-bg-card-hover: rgba(255, 255, 255, 0.8);
+  /* Forest Green & Warm Brown Theme */
+  --color-bg-primary: #414833;
+  --color-bg-secondary: #3a4130;
+  --color-bg-tertiary: #4a5240;
+  --color-bg-card: rgba(127, 85, 57, 0.1);
+  --color-bg-card-hover: rgba(127, 85, 57, 0.15);
 
-  /* Warm Text Colors - Matching the gradient */
-  --color-text-primary: #581c87;
-  --color-text-secondary: #7e22ce;
-  --color-text-muted: #a855f7;
+  /* Text Colors - Warm Brown Tones */
+  --color-text-primary: #7f5539;
+  --color-text-secondary: #9c6644;
+  --color-text-muted: #b08968;
 
-  /* Vibrant Accent Colors */
-  --color-cyan: #06b6d4;
-  --color-purple: #a855f7;
-  --color-pink: #ec4899;
-  --color-green: #10b981;
-  --color-orange: #f97316;
-  --color-gold: #eab308;
+  /* Accent Colors */
+  --color-cyan: #dda15e;
+  --color-purple: #bc6c25;
+  --color-pink: #dda15e;
+  --color-green: #606c38;
+  --color-orange: #bc6c25;
+  --color-gold: #dda15e;
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-  --gradient-cyan: linear-gradient(135deg, #06b6d4 0%, #a855f7 100%);
-  --gradient-gold: linear-gradient(135deg, #f97316 0%, #eab308 100%);
-  --gradient-green: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-  --gradient-text: linear-gradient(90deg, #f97316 0%, #ec4899 50%, #a855f7 100%);
-  --gradient-warm: linear-gradient(135deg, #fbbf24 0%, #f97316 50%, #ec4899 100%);
+  /* Gradients - Warm Earth Tones */
+  --gradient-primary: linear-gradient(135deg, #bc6c25 0%, #dda15e 100%);
+  --gradient-cyan: linear-gradient(135deg, #dda15e 0%, #bc6c25 100%);
+  --gradient-gold: linear-gradient(135deg, #bc6c25 0%, #dda15e 100%);
+  --gradient-green: linear-gradient(135deg, #606c38 0%, #7f5539 100%);
+  --gradient-text: linear-gradient(90deg, #bc6c25 0%, #dda15e 50%, #7f5539 100%);
+  --gradient-warm: linear-gradient(135deg, #dda15e 0%, #bc6c25 50%, #7f5539 100%);
 
-  /* Glass Effect - Warm Tint */
-  --glass-bg: rgba(255, 255, 255, 0.5);
-  --glass-border: rgba(236, 72, 153, 0.15);
+  /* Glass Effect - Dark Forest */
+  --glass-bg: rgba(65, 72, 51, 0.8);
+  --glass-border: rgba(127, 85, 57, 0.3);
   --glass-blur: blur(20px);
 
-  /* Shadows & Glows - Warm Tones */
-  --shadow-sm: 0 2px 8px rgba(236, 72, 153, 0.08);
-  --shadow-md: 0 8px 24px rgba(236, 72, 153, 0.12);
-  --shadow-lg: 0 16px 48px rgba(236, 72, 153, 0.15);
-  --glow-orange: 0 4px 20px rgba(249, 115, 22, 0.3);
-  --glow-pink: 0 4px 20px rgba(236, 72, 153, 0.3);
-  --glow-purple: 0 4px 20px rgba(168, 85, 247, 0.3);
+  /* Shadows & Glows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.3);
+  --glow-orange: 0 4px 20px rgba(188, 108, 37, 0.4);
+  --glow-pink: 0 4px 20px rgba(221, 161, 94, 0.4);
+  --glow-purple: 0 4px 20px rgba(127, 85, 57, 0.4);
 
   /* Radius */
   --radius-sm: 0.5rem;
@@ -76,8 +75,7 @@ html {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--color-bg-gradient);
-  background-attachment: fixed;
+  background: var(--color-bg-primary);
   color: var(--color-text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -244,11 +242,11 @@ ol {
 
   0%,
   100% {
-    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 4px 20px rgba(188, 108, 37, 0.4);
   }
 
   50% {
-    box-shadow: 0 4px 30px rgba(236, 72, 153, 0.5);
+    box-shadow: 0 4px 30px rgba(221, 161, 94, 0.6);
   }
 }
 

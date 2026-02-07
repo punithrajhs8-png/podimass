@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './GradfastLanding.css';
-import Ballpit from './Ballpit';
 import ClickSpark from './ClickSpark';
 
 // ==================== SCROLL ANIMATION HOOK ====================
@@ -99,22 +98,6 @@ const Header: React.FC = () => {
 const Hero: React.FC = () => {
     return (
         <section className="hero">
-            {/* Ballpit Background */}
-            <div className="hero-ballpit">
-                <Ballpit
-                    className="ballpit-canvas"
-                    count={80}
-                    colors={[0xf97316, 0xec4899, 0xa855f7, 0xfbbf24]}
-                    gravity={0.3}
-                    minSize={0.4}
-                    maxSize={1.2}
-                    followCursor={true}
-                />
-            </div>
-
-            {/* Overlay for text readability */}
-            <div className="hero-overlay" />
-
             <div className="container hero-container">
                 <AnimatedSection className="hero-content">
                     <div className="hero-badge">
@@ -662,7 +645,7 @@ const Footer: React.FC = () => {
 const GradfastLanding: React.FC = () => {
     return (
         <ClickSpark
-            sparkColor="#ec4899"
+            sparkColor="#dda15e"
             sparkSize={12}
             sparkRadius={20}
             sparkCount={10}
