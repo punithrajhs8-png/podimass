@@ -1,44 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Shopify Editions Inspired Colors */
-  --color-bg-primary: #000000;
-  --color-bg-secondary: #0a0a0a;
-  --color-bg-tertiary: #111111;
-  --color-bg-card: rgba(255, 255, 255, 0.02);
-  --color-bg-card-hover: rgba(255, 255, 255, 0.05);
+  /* Light Theme Colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-tertiary: #f1f5f9;
+  --color-bg-card: rgba(0, 0, 0, 0.02);
+  --color-bg-card-hover: rgba(0, 0, 0, 0.04);
 
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #888888;
-  --color-text-muted: #555555;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
 
   /* Vibrant Gradient Colors */
-  --color-cyan: #00d4ff;
-  --color-purple: #7b2ff7;
-  --color-pink: #f72585;
-  --color-green: #00ff88;
-  --color-orange: #ff6b35;
-  --color-gold: #ffd700;
+  --color-cyan: #0ea5e9;
+  --color-purple: #8b5cf6;
+  --color-pink: #ec4899;
+  --color-green: #10b981;
+  --color-orange: #f97316;
+  --color-gold: #eab308;
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #7b2ff7 0%, #f72585 100%);
-  --gradient-cyan: linear-gradient(135deg, #00d4ff 0%, #7b2ff7 100%);
-  --gradient-gold: linear-gradient(135deg, #ff6b35 0%, #ffd700 100%);
-  --gradient-green: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
-  --gradient-text: linear-gradient(90deg, #00d4ff 0%, #7b2ff7 50%, #f72585 100%);
+  --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --gradient-cyan: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
+  --gradient-gold: linear-gradient(135deg, #f97316 0%, #eab308 100%);
+  --gradient-green: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
+  --gradient-text: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%);
 
-  /* Glass Effect */
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  /* Glass Effect - Light Mode */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
   --glass-blur: blur(20px);
 
-  /* Shadows & Glows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.5);
-  --glow-cyan: 0 0 60px rgba(0, 212, 255, 0.3);
-  --glow-purple: 0 0 60px rgba(123, 47, 247, 0.3);
-  --glow-pink: 0 0 60px rgba(247, 37, 133, 0.3);
+  /* Shadows & Glows - Light Mode */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --glow-cyan: 0 4px 20px rgba(14, 165, 233, 0.25);
+  --glow-purple: 0 4px 20px rgba(139, 92, 246, 0.25);
+  --glow-pink: 0 4px 20px rgba(236, 72, 153, 0.25);
 
   /* Radius - Larger for Bento Style */
   --radius-sm: 0.5rem;
@@ -48,7 +48,7 @@
   --radius-full: 9999px;
 
   /* Spacing */
-  --section-padding: 8rem;
+  --section-padding: 6rem;
   --container-max: 1400px;
 
   /* Transitions - Premium Easing */
@@ -239,11 +239,11 @@ ol {
 
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
   }
 
   50% {
-    box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+    box-shadow: 0 4px 30px rgba(14, 165, 233, 0.5);
   }
 }
 
@@ -295,11 +295,11 @@ ol {
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
   transition: all var(--transition-normal);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
 }

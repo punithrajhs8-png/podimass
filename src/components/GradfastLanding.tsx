@@ -70,7 +70,6 @@ const Header: React.FC = () => {
             <div className="container header-container">
                 <a href="/" className="logo">
                     <span className="logo-text">GRADFAST</span>
-                    <span className="logo-badge">Winter '26</span>
                 </a>
 
                 <nav className="nav">
