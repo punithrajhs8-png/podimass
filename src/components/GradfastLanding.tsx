@@ -100,11 +100,6 @@ const Hero: React.FC = () => {
         <section className="hero">
             <div className="container hero-container">
                 <AnimatedSection className="hero-content">
-                    <div className="hero-badge">
-                        <span className="badge-pulse" />
-                        <span className="badge-label">THE RENAISSANCE EDITION</span>
-                    </div>
-
                     <h1 className="hero-title">
                         Accelerate Your
                         <br />
