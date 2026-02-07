@@ -464,6 +464,53 @@
     line-height: 1.7;
 }
 
+/* ==================== PROGRAM TOGGLE ==================== */
+.program-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    background: rgba(65, 72, 51, 0.6);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.toggle-btn:hover {
+    background: rgba(74, 82, 64, 0.8);
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+    transform: translateY(-2px);
+}
+
+.toggle-btn.active {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: white;
+    box-shadow: var(--glow-orange);
+}
+
+.toggle-btn.active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(188, 108, 37, 0.5);
+}
+
+.toggle-icon {
+    font-size: 1.25rem;
+}
+
 /* ==================== BENTO GRID ==================== */
 .programs {
     background: transparent;

@@ -198,6 +198,8 @@ const BentoCard: React.FC<BentoCardProps> = ({
 };
 
 const Programs: React.FC = () => {
+    const [activeTab, setActiveTab] = useState<'fasttrack' | 'abroad'>('fasttrack');
+
     return (
         <section className="programs section" id="programs">
             {/* Section Glow */}
@@ -217,98 +219,120 @@ const Programs: React.FC = () => {
                         Choose from accredited fast-track programs and discover top study destinations
                         with comprehensive support from application to arrival.
                     </p>
+
+                    {/* Toggle Buttons */}
+                    <div className="program-toggle">
+                        <button
+                            className={`toggle-btn ${activeTab === 'fasttrack' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('fasttrack')}
+                        >
+                            <span className="toggle-icon">🎓</span>
+                            Fast Track Degree
+                        </button>
+                        <button
+                            className={`toggle-btn ${activeTab === 'abroad' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('abroad')}
+                        >
+                            <span className="toggle-icon">✈️</span>
+                            Study Abroad
+                        </button>
+                    </div>
                 </AnimatedSection>
 
                 {/* Fast-Track Graduation Section */}
-                <div className="bento-section">
-                    <AnimatedSection className="bento-header">
-                        <div className="bento-header-icon">🎓</div>
-                        <div>
-                            <h3 className="bento-header-title">Fast-Track Graduation</h3>
-                            <p className="bento-header-subtitle">Accelerate your path to a degree</p>
-                        </div>
-                    </AnimatedSection>
+                {activeTab === 'fasttrack' && (
+                    <div className="bento-section">
+                        <AnimatedSection className="bento-header">
+                            <div className="bento-header-icon">🎓</div>
+                            <div>
+                                <h3 className="bento-header-title">Fast-Track Graduation</h3>
+                                <p className="bento-header-subtitle">Accelerate your path to a degree</p>
+                            </div>
+                        </AnimatedSection>
 
-                    <div className="bento-grid bento-grid--graduation">
-                        <BentoCard
-                            title="Accelerated BA"
-                            description="Complete your bachelor's degree in less time with our intensive, accredited programs."
-                            features={['2-3 Year Completion', 'Fully Accredited', 'Flexible Schedule']}
-                            icon="⚡"
-                            gradient="var(--gradient-cyan)"
-                            size="large"
-                            delay={0}
-                        />
-                        <BentoCard
-                            title="Credit Transfer"
-                            description="Move your existing credits seamlessly to accelerate completion."
-                            features={['Easy Evaluation', 'Partner Universities', 'Maximum Transfer']}
-                            icon="🔄"
-                            gradient="var(--gradient-primary)"
-                            size="medium"
-                            delay={100}
-                        />
-                        <BentoCard
-                            title="Online-to-Campus"
-                            description="Start online and graduate with an on-campus experience."
-                            features={['Hybrid Learning', 'Campus Immersion', 'Global Network']}
-                            icon="💻"
-                            gradient="var(--gradient-gold)"
-                            size="medium"
-                            delay={200}
-                        />
+                        <div className="bento-grid bento-grid--graduation">
+                            <BentoCard
+                                title="Accelerated BA"
+                                description="Complete your bachelor's degree in less time with our intensive, accredited programs."
+                                features={['2-3 Year Completion', 'Fully Accredited', 'Flexible Schedule']}
+                                icon="⚡"
+                                gradient="var(--gradient-cyan)"
+                                size="large"
+                                delay={0}
+                            />
+                            <BentoCard
+                                title="Credit Transfer"
+                                description="Move your existing credits seamlessly to accelerate completion."
+                                features={['Easy Evaluation', 'Partner Universities', 'Maximum Transfer']}
+                                icon="🔄"
+                                gradient="var(--gradient-primary)"
+                                size="medium"
+                                delay={100}
+                            />
+                            <BentoCard
+                                title="Online-to-Campus"
+                                description="Start online and graduate with an on-campus experience."
+                                features={['Hybrid Learning', 'Campus Immersion', 'Global Network']}
+                                icon="💻"
+                                gradient="var(--gradient-gold)"
+                                size="medium"
+                                delay={200}
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {/* Study Abroad Section */}
-                <div className="bento-section">
-                    <AnimatedSection className="bento-header">
-                        <div className="bento-header-icon">✈️</div>
-                        <div>
-                            <h3 className="bento-header-title">Study Abroad</h3>
-                            <p className="bento-header-subtitle">Your gateway to global education</p>
-                        </div>
-                    </AnimatedSection>
+                {activeTab === 'abroad' && (
+                    <div className="bento-section">
+                        <AnimatedSection className="bento-header">
+                            <div className="bento-header-icon">✈️</div>
+                            <div>
+                                <h3 className="bento-header-title">Study Abroad</h3>
+                                <p className="bento-header-subtitle">Your gateway to global education</p>
+                            </div>
+                        </AnimatedSection>
 
-                    <div className="bento-grid bento-grid--abroad">
-                        <BentoCard
-                            title="United Kingdom"
-                            description="Access world-renowned universities with comprehensive UK admission support."
-                            features={['Top Universities', 'Quick Visa', 'Post-Study Work']}
-                            icon="🇬🇧"
-                            gradient="linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)"
-                            size="medium"
-                            delay={0}
-                        />
-                        <BentoCard
-                            title="Canada"
-                            description="Discover co-op programs and work-study pathways in Canada's top institutions."
-                            features={['Co-op Programs', 'PR Pathways', 'Affordable']}
-                            icon="🇨🇦"
-                            gradient="linear-gradient(135deg, #dc2626 0%, #f87171 100%)"
-                            size="medium"
-                            delay={100}
-                        />
-                        <BentoCard
-                            title="Australia"
-                            description="Experience streamlined enrollment and quality education in Australia."
-                            features={['Easy Process', 'Work Rights', 'Quality Life']}
-                            icon="🇦🇺"
-                            gradient="linear-gradient(135deg, #059669 0%, #34d399 100%)"
-                            size="medium"
-                            delay={200}
-                        />
-                        <BentoCard
-                            title="Visa & SOP"
-                            description="Get personalized document preparation and visa application support."
-                            features={['SOP Writing', 'Visa Guidance', 'Interview Prep']}
-                            icon="📋"
-                            gradient="linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)"
-                            size="medium"
-                            delay={300}
-                        />
+                        <div className="bento-grid bento-grid--abroad">
+                            <BentoCard
+                                title="United Kingdom"
+                                description="Access world-renowned universities with comprehensive UK admission support."
+                                features={['Top Universities', 'Quick Visa', 'Post-Study Work']}
+                                icon="🇬🇧"
+                                gradient="linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)"
+                                size="medium"
+                                delay={0}
+                            />
+                            <BentoCard
+                                title="Canada"
+                                description="Discover co-op programs and work-study pathways in Canada's top institutions."
+                                features={['Co-op Programs', 'PR Pathways', 'Affordable']}
+                                icon="🇨🇦"
+                                gradient="linear-gradient(135deg, #dc2626 0%, #f87171 100%)"
+                                size="medium"
+                                delay={100}
+                            />
+                            <BentoCard
+                                title="Australia"
+                                description="Experience streamlined enrollment and quality education in Australia."
+                                features={['Easy Process', 'Work Rights', 'Quality Life']}
+                                icon="🇦🇺"
+                                gradient="linear-gradient(135deg, #059669 0%, #34d399 100%)"
+                                size="medium"
+                                delay={200}
+                            />
+                            <BentoCard
+                                title="Visa & SOP"
+                                description="Get personalized document preparation and visa application support."
+                                features={['SOP Writing', 'Visa Guidance', 'Interview Prep']}
+                                icon="📋"
+                                gradient="linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)"
+                                size="medium"
+                                delay={300}
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </section>
     );
