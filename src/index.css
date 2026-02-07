@@ -1,46 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Light Theme Colors */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8fafc;
-  --color-bg-tertiary: #f1f5f9;
-  --color-bg-card: rgba(0, 0, 0, 0.02);
-  --color-bg-card-hover: rgba(0, 0, 0, 0.04);
+  /* Gradient Background Theme - Soft Peach to Lavender */
+  --color-bg-gradient: linear-gradient(135deg, #fef3e2 0%, #fce7f3 50%, #ede9fe 100%);
+  --color-bg-primary: #fef7ed;
+  --color-bg-secondary: #fdf2f8;
+  --color-bg-tertiary: #f5f3ff;
+  --color-bg-card: rgba(255, 255, 255, 0.6);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.8);
 
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
+  /* Warm Text Colors - Matching the gradient */
+  --color-text-primary: #581c87;
+  --color-text-secondary: #7e22ce;
+  --color-text-muted: #a855f7;
 
-  /* Vibrant Gradient Colors */
-  --color-cyan: #0ea5e9;
-  --color-purple: #8b5cf6;
+  /* Vibrant Accent Colors */
+  --color-cyan: #06b6d4;
+  --color-purple: #a855f7;
   --color-pink: #ec4899;
   --color-green: #10b981;
   --color-orange: #f97316;
   --color-gold: #eab308;
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
-  --gradient-cyan: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
+  --gradient-primary: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+  --gradient-cyan: linear-gradient(135deg, #06b6d4 0%, #a855f7 100%);
   --gradient-gold: linear-gradient(135deg, #f97316 0%, #eab308 100%);
-  --gradient-green: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
-  --gradient-text: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%);
+  --gradient-green: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  --gradient-text: linear-gradient(90deg, #f97316 0%, #ec4899 50%, #a855f7 100%);
+  --gradient-warm: linear-gradient(135deg, #fbbf24 0%, #f97316 50%, #ec4899 100%);
 
-  /* Glass Effect - Light Mode */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.08);
+  /* Glass Effect - Warm Tint */
+  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(236, 72, 153, 0.15);
   --glass-blur: blur(20px);
 
-  /* Shadows & Glows - Light Mode */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
-  --glow-cyan: 0 4px 20px rgba(14, 165, 233, 0.25);
-  --glow-purple: 0 4px 20px rgba(139, 92, 246, 0.25);
-  --glow-pink: 0 4px 20px rgba(236, 72, 153, 0.25);
+  /* Shadows & Glows - Warm Tones */
+  --shadow-sm: 0 2px 8px rgba(236, 72, 153, 0.08);
+  --shadow-md: 0 8px 24px rgba(236, 72, 153, 0.12);
+  --shadow-lg: 0 16px 48px rgba(236, 72, 153, 0.15);
+  --glow-orange: 0 4px 20px rgba(249, 115, 22, 0.3);
+  --glow-pink: 0 4px 20px rgba(236, 72, 153, 0.3);
+  --glow-purple: 0 4px 20px rgba(168, 85, 247, 0.3);
 
-  /* Radius - Larger for Bento Style */
+  /* Radius */
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
@@ -51,7 +54,7 @@
   --section-padding: 6rem;
   --container-max: 1400px;
 
-  /* Transitions - Premium Easing */
+  /* Transitions */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: 0.2s var(--ease-in-out);
@@ -73,12 +76,14 @@ html {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--color-bg-primary);
+  background: var(--color-bg-gradient);
+  background-attachment: fixed;
   color: var(--color-text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 h1,
@@ -239,11 +244,11 @@ ol {
 
   0%,
   100% {
-    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
+    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
   }
 
   50% {
-    box-shadow: 0 4px 30px rgba(14, 165, 233, 0.5);
+    box-shadow: 0 4px 30px rgba(236, 72, 153, 0.5);
   }
 }
 
