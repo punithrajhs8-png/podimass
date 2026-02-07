@@ -8,10 +8,10 @@
   --color-bg-card: rgba(127, 85, 57, 0.1);
   --color-bg-card-hover: rgba(127, 85, 57, 0.15);
 
-  /* Text Colors - Warm Brown Tones */
-  --color-text-primary: #7f5539;
-  --color-text-secondary: #9c6644;
-  --color-text-muted: #b08968;
+  /* Text Colors - Golden/Honey Tones */
+  --color-text-primary: #dda15e;
+  --color-text-secondary: #bc6c25;
+  --color-text-muted: #9c6644;
 
   /* Accent Colors */
   --color-cyan: #dda15e;
