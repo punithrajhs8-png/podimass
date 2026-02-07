@@ -1,10 +1,11 @@
-import LandingPage from './components/LandingPage';
+import GradfastLanding from './components/GradfastLanding';
 
 function App() {
   return (
-    <LandingPage />
+    <GradfastLanding />
   );
 }
 
 export default App;
+
 
