@@ -221,8 +221,8 @@
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(168, 85, 247, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(168, 85, 247, 0.05) 1px, transparent 1px);
+        linear-gradient(rgba(90, 62, 43, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(90, 62, 43, 0.1) 1px, transparent 1px);
     background-size: 80px 80px;
     mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
 }

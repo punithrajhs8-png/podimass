@@ -8,26 +8,26 @@
   --color-bg-card: rgba(127, 85, 57, 0.15);
   --color-bg-card-hover: rgba(127, 85, 57, 0.25);
 
-  /* Text Colors - Golden/Honey Tones */
-  --color-text-primary: #dda15e;
-  --color-text-secondary: #bc6c25;
-  --color-text-muted: #9c6644;
+  /* Text Colors - Dark Forest Green */
+  --color-text-primary: #414833;
+  --color-text-secondary: #2d3324;
+  --color-text-muted: #576044;
 
-  /* Accent Colors */
-  --color-cyan: #dda15e;
-  --color-purple: #bc6c25;
-  --color-pink: #dda15e;
-  --color-green: #606c38;
-  --color-orange: #bc6c25;
-  --color-gold: #dda15e;
+  /* Accent Colors - Darker Earth Tones for Light Background */
+  --color-cyan: #414833;
+  --color-purple: #5a3e2b;
+  --color-pink: #7f5539;
+  --color-green: #2d3324;
+  --color-orange: #9c6644;
+  --color-gold: #5a3e2b;
 
-  /* Gradients - Warm Earth Tones */
-  --gradient-primary: linear-gradient(135deg, #bc6c25 0%, #dda15e 100%);
-  --gradient-cyan: linear-gradient(135deg, #dda15e 0%, #bc6c25 100%);
-  --gradient-gold: linear-gradient(135deg, #bc6c25 0%, #dda15e 100%);
-  --gradient-green: linear-gradient(135deg, #606c38 0%, #7f5539 100%);
-  --gradient-text: linear-gradient(90deg, #bc6c25 0%, #dda15e 50%, #7f5539 100%);
-  --gradient-warm: linear-gradient(135deg, #dda15e 0%, #bc6c25 50%, #7f5539 100%);
+  /* Gradients - Darker Warm Earth Tones */
+  --gradient-primary: linear-gradient(135deg, #7f5539 0%, #5a3e2b 100%);
+  --gradient-cyan: linear-gradient(135deg, #414833 0%, #2d3324 100%);
+  --gradient-gold: linear-gradient(135deg, #9c6644 0%, #7f5539 100%);
+  --gradient-green: linear-gradient(135deg, #414833 0%, #2d3324 100%);
+  --gradient-text: linear-gradient(90deg, #414833 0%, #5a3e2b 50%, #7f5539 100%);
+  --gradient-warm: linear-gradient(135deg, #7f5539 0%, #5a3e2b 50%, #414833 100%);
 
   /* Glass Effect - Dark Forest */
   --glass-bg: rgba(166, 138, 100, 0.8);
