@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './GradfastLanding.css';
 import Ballpit from './Ballpit';
+import ClickSpark from './ClickSpark';
 
 // ==================== SCROLL ANIMATION HOOK ====================
 const useScrollReveal = () => {
@@ -660,17 +661,27 @@ const Footer: React.FC = () => {
 // ==================== MAIN LANDING PAGE ====================
 const GradfastLanding: React.FC = () => {
     return (
-        <div className="gradfast-app">
-            <Header />
-            <main>
-                <Hero />
-                <Programs />
-                <Process />
-                <Testimonials />
-                <CTA />
-            </main>
-            <Footer />
-        </div>
+        <ClickSpark
+            sparkColor="#ec4899"
+            sparkSize={12}
+            sparkRadius={20}
+            sparkCount={10}
+            duration={500}
+            easing="ease-out"
+            extraScale={1.2}
+        >
+            <div className="gradfast-app">
+                <Header />
+                <main>
+                    <Hero />
+                    <Programs />
+                    <Process />
+                    <Testimonials />
+                    <CTA />
+                </main>
+                <Footer />
+            </div>
+        </ClickSpark>
     );
 };
 
