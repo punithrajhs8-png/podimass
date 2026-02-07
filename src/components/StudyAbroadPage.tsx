@@ -257,15 +257,6 @@ const StudyAbroadCountries: React.FC = () => {
                             size="medium"
                             delay={200}
                         />
-                        <BentoCard
-                            title="Germany"
-                            description="Study tuition-free in Germany's world-class technical universities with excellent research facilities."
-                            features={['Tuition Free', 'Strong Economy', 'Research Focus', 'Work Opportunities']}
-                            icon="🇩🇪"
-                            gradient="linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)"
-                            size="medium"
-                            delay={300}
-                        />
                     </div>
                 </div>
 
