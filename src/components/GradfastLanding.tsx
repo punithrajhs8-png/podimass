@@ -1,87 +1,94 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './GradfastLanding.css';
+
+// ==================== SCROLL ANIMATION HOOK ====================
+const useScrollReveal = () => {
+    const ref = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1, rootMargin: '50px' }
+        );
+
+        if (ref.current) {
+            observer.observe(ref.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    return { ref, isVisible };
+};
+
+// ==================== ANIMATED SECTION WRAPPER ====================
+interface AnimatedSectionProps {
+    children: React.ReactNode;
+    className?: string;
+    delay?: number;
+}
+
+const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, className = '', delay = 0 }) => {
+    const { ref, isVisible } = useScrollReveal();
+
+    return (
+        <div
+            ref={ref}
+            className={`animated-section ${isVisible ? 'is-visible' : ''} ${className}`}
+            style={{ transitionDelay: `${delay}ms` }}
+        >
+            {children}
+        </div>
+    );
+};
 
 // ==================== HEADER ====================
 const Header: React.FC = () => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [scrollProgress, setScrollProgress] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            setScrollProgress((window.scrollY / totalHeight) * 100);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
-        <header className="header">
+        <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
+            <div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />
             <div className="container header-container">
                 <a href="/" className="logo">
                     <span className="logo-text">GRADFAST</span>
+                    <span className="logo-badge">Winter '26</span>
                 </a>
 
-                <nav className={`nav ${mobileMenuOpen ? 'nav--open' : ''}`}>
-                    <div className="nav-group">
-                        <div className="nav-dropdown">
-                            <button className="nav-link">Programs <span className="nav-arrow">▼</span></button>
-                            <div className="dropdown-menu">
-                                <a href="/programs/graduation" className="dropdown-item">
-                                    <span className="dropdown-title">All Programs</span>
-                                    <span className="dropdown-desc">B.Tech, MBA, BBA, B.Com, MCA & more</span>
-                                </a>
-                                <a href="/programs/graduation/btech" className="dropdown-item">
-                                    <span className="dropdown-title">B.Tech</span>
-                                    <span className="dropdown-desc">Engineering & Technology programs</span>
-                                </a>
-                                <a href="/programs/graduation/mba" className="dropdown-item">
-                                    <span className="dropdown-title">MBA</span>
-                                    <span className="dropdown-desc">Accelerated MBA for professionals</span>
-                                </a>
-                                <a href="/programs/graduation/bba" className="dropdown-item">
-                                    <span className="dropdown-title">BBA</span>
-                                    <span className="dropdown-desc">Bachelor of Business Administration</span>
-                                </a>
-                                <a href="/programs/graduation/mca" className="dropdown-item">
-                                    <span className="dropdown-title">MCA</span>
-                                    <span className="dropdown-desc">Master of Computer Applications</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="nav-dropdown">
-                            <button className="nav-link">Universities <span className="nav-arrow">▼</span></button>
-                            <div className="dropdown-menu">
-                                <a href="/distance-education/institutes-national-importance" className="dropdown-item">
-                                    <span className="dropdown-title">Institutes of National Importance</span>
-                                    <span className="dropdown-desc">Premier institutes recognized by GOI</span>
-                                </a>
-                                <a href="/distance-education/central-universities" className="dropdown-item">
-                                    <span className="dropdown-title">Central Govt Universities</span>
-                                    <span className="dropdown-desc">Strictly under the central government</span>
-                                </a>
-                                <a href="/distance-education/state-universities" className="dropdown-item">
-                                    <span className="dropdown-title">State Govt Universities</span>
-                                    <span className="dropdown-desc">State-funded universities</span>
-                                </a>
-                                <a href="/distance-education/private-universities" className="dropdown-item">
-                                    <span className="dropdown-title">Private Universities</span>
-                                    <span className="dropdown-desc">UGC-approved private institutions</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <a href="/process" className="nav-link">Process</a>
-                        <a href="/testimonials" className="nav-link">Success Stories</a>
-                        <a href="/blog" className="nav-link">Blog</a>
-                    </div>
+                <nav className="nav">
+                    <a href="#programs" className="nav-link">Programs</a>
+                    <a href="#process" className="nav-link">Process</a>
+                    <a href="#testimonials" className="nav-link">Stories</a>
+                    <a href="#contact" className="nav-link">Contact</a>
                 </nav>
 
                 <div className="header-actions">
-                    <a href="/eligibility" className="btn btn-secondary">Check Eligibility</a>
-                    <a href="/contact" className="btn btn-primary">Contact Us</a>
+                    <a href="/eligibility" className="btn btn-ghost">Check Eligibility</a>
+                    <a href="/contact" className="btn btn-primary">
+                        <span>Get Started</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
                 </div>
-
-                <button
-                    className="mobile-menu-btn"
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    aria-label="Toggle menu"
-                >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </div>
         </header>
     );
@@ -91,199 +98,235 @@ const Header: React.FC = () => {
 const Hero: React.FC = () => {
     return (
         <section className="hero">
+            {/* Animated Background */}
             <div className="hero-bg">
-                <div className="hero-glow hero-glow--1"></div>
-                <div className="hero-glow hero-glow--2"></div>
-                <div className="hero-grid"></div>
+                <div className="hero-glow hero-glow--cyan" />
+                <div className="hero-glow hero-glow--purple" />
+                <div className="hero-glow hero-glow--pink" />
+                <div className="hero-grid" />
+                <div className="hero-noise" />
             </div>
 
             <div className="container hero-container">
-                <div className="hero-content">
+                <AnimatedSection className="hero-content">
                     <div className="hero-badge">
-                        <span className="badge-dot"></span>
-                        <span>Fast-Track Graduation & Study Abroad</span>
+                        <span className="badge-pulse" />
+                        <span className="badge-label">THE RENAISSANCE EDITION</span>
                     </div>
 
                     <h1 className="hero-title">
                         Accelerate Your
-                        <span className="gradient-text"> Degree Journey</span>
+                        <br />
+                        <span className="hero-title-gradient">Degree Journey</span>
                     </h1>
 
                     <p className="hero-subtitle">
                         Complete your accredited degree faster through credit transfer and
-                        university-verified pathways. Designed for ambitious learners who want
-                        to turn their study dreams into a worldwide experience.
+                        university-verified pathways. Turn your study dreams into a worldwide experience.
                     </p>
 
                     <div className="hero-cta">
-                        <a href="/eligibility" className="btn btn-primary btn-lg">
+                        <a href="/eligibility" className="btn btn-primary btn-lg btn-glow">
                             <span>Check Eligibility</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </a>
-                        <a href="/programs/graduation" className="btn btn-outline btn-lg">
+                        <a href="#programs" className="btn btn-outline btn-lg">
                             Explore Programs
                         </a>
                     </div>
+                </AnimatedSection>
 
-                    <div className="hero-stats">
-                        <div className="stat">
-                            <span className="stat-value">10,000+</span>
-                            <span className="stat-label">Graduates</span>
-                        </div>
-                        <div className="stat-divider"></div>
-                        <div className="stat">
-                            <span className="stat-value">50+</span>
-                            <span className="stat-label">Universities</span>
-                        </div>
-                        <div className="stat-divider"></div>
-                        <div className="stat">
-                            <span className="stat-value">15+</span>
-                            <span className="stat-label">Countries</span>
-                        </div>
+                <AnimatedSection className="hero-stats" delay={200}>
+                    <div className="stat-card">
+                        <span className="stat-value">10K+</span>
+                        <span className="stat-label">Graduates</span>
                     </div>
-                </div>
+                    <div className="stat-card">
+                        <span className="stat-value">50+</span>
+                        <span className="stat-label">Universities</span>
+                    </div>
+                    <div className="stat-card">
+                        <span className="stat-value">15+</span>
+                        <span className="stat-label">Countries</span>
+                    </div>
+                    <div className="stat-card">
+                        <span className="stat-value">98%</span>
+                        <span className="stat-label">Success Rate</span>
+                    </div>
+                </AnimatedSection>
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className="scroll-indicator">
+                <span>Scroll to explore</span>
+                <div className="scroll-arrow" />
             </div>
         </section>
     );
 };
 
-// ==================== PROGRAMS ====================
-interface ProgramCardProps {
+// ==================== BENTO GRID PROGRAMS ====================
+interface BentoCardProps {
     title: string;
     description: string;
     features: string[];
     icon: string;
-    link: string;
     gradient: string;
+    size?: 'small' | 'medium' | 'large';
+    delay?: number;
 }
 
-const ProgramCard: React.FC<ProgramCardProps> = ({ title, description, features, icon, link, gradient }) => (
-    <div className="program-card">
-        <div className="program-icon" style={{ background: gradient }}>
-            <span>{icon}</span>
-        </div>
-        <h3 className="program-title">{title}</h3>
-        <p className="program-description">{description}</p>
-        <ul className="program-features">
-            {features.map((feature, index) => (
-                <li key={index}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    {feature}
-                </li>
-            ))}
-        </ul>
-        <a href={link} className="program-link">
-            Learn More
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-        </a>
-    </div>
-);
-
-const Programs: React.FC = () => {
-    const graduationPrograms: ProgramCardProps[] = [
-        {
-            title: 'Accelerated BA',
-            description: "Complete your bachelor's degree in less time with our intensive, accredited programs.",
-            features: ['2-3 Year Completion', 'Fully Accredited', 'Flexible Schedule'],
-            icon: '🎓',
-            link: '/programs/graduation/ba',
-            gradient: 'var(--gradient-primary)'
-        },
-        {
-            title: 'Credit Transfer Pathways',
-            description: 'Move your existing credits seamlessly to accelerate your degree completion.',
-            features: ['Easy Credit Evaluation', 'Partner Universities', 'Maximum Transfer'],
-            icon: '🔄',
-            link: '/credit-transfer',
-            gradient: 'var(--gradient-secondary)'
-        },
-        {
-            title: 'Online-to-Campus Blend',
-            description: 'Start your journey online and graduate with an on-campus experience.',
-            features: ['Hybrid Learning', 'Campus Immersion', 'Global Network'],
-            icon: '💻',
-            link: '/programs/online-to-campus',
-            gradient: 'var(--gradient-gold)'
-        }
-    ];
-
-    const studyAbroadPrograms: ProgramCardProps[] = [
-        {
-            title: 'United Kingdom',
-            description: 'Access world-renowned universities with our comprehensive UK admission support.',
-            features: ['Top-Tier Universities', 'Quick Visa Support', 'Post-Study Work Visa'],
-            icon: '🇬🇧',
-            link: '/study-abroad/uk',
-            gradient: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)'
-        },
-        {
-            title: 'Canada',
-            description: 'Discover co-op programs and work-study pathways in Canada\'s top institutions.',
-            features: ['Co-op Programs', 'PR Pathways', 'Affordable Tuition'],
-            icon: '🇨🇦',
-            link: '/study-abroad/canada',
-            gradient: 'linear-gradient(135deg, #dc2626 0%, #f87171 100%)'
-        },
-        {
-            title: 'Australia',
-            description: 'Experience streamlined enrollment and quality education in Australia.',
-            features: ['Streamlined Process', 'Work Rights', 'Quality Living'],
-            icon: '🇦🇺',
-            link: '/study-abroad/australia',
-            gradient: 'linear-gradient(135deg, #059669 0%, #34d399 100%)'
-        },
-        {
-            title: 'Visa & SOP Assistance',
-            description: 'Get personalized document preparation and visa application support.',
-            features: ['SOP Writing', 'Visa Guidance', 'Interview Prep'],
-            icon: '📄',
-            link: '/visa-assistance',
-            gradient: 'linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)'
-        }
-    ];
+const BentoCard: React.FC<BentoCardProps> = ({
+    title, description, features, icon, gradient, size = 'medium', delay = 0
+}) => {
+    const { ref, isVisible } = useScrollReveal();
 
     return (
+        <div
+            ref={ref}
+            className={`bento-card bento-card--${size} ${isVisible ? 'is-visible' : ''}`}
+            style={{ animationDelay: `${delay}ms` }}
+        >
+            <div className="bento-card-glow" style={{ background: gradient }} />
+            <div className="bento-card-content">
+                <div className="bento-icon" style={{ background: gradient }}>
+                    <span>{icon}</span>
+                </div>
+                <h3 className="bento-title">{title}</h3>
+                <p className="bento-description">{description}</p>
+                <ul className="bento-features">
+                    {features.map((feature, index) => (
+                        <li key={index}>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            {feature}
+                        </li>
+                    ))}
+                </ul>
+                <a href="#" className="bento-link">
+                    Learn More
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    );
+};
+
+const Programs: React.FC = () => {
+    return (
         <section className="programs section" id="programs">
+            {/* Section Glow */}
+            <div className="section-glow section-glow--left" />
+
             <div className="container">
-                <div className="section-header">
-                    <span className="section-tag">Our Programs</span>
+                <AnimatedSection className="section-header">
+                    <span className="section-tag">
+                        <span className="tag-dot" />
+                        Our Programs
+                    </span>
                     <h2 className="section-title">
-                        Accelerate Your Academic Journey
-                        <span className="gradient-text"> A Simpler Way to Become and Discover</span>
+                        A Simpler Way to
+                        <span className="gradient-text"> Become and Discover</span>
                     </h2>
                     <p className="section-subtitle">
-                        Choose from our range of accredited fast-track programs designed for ambitious learners.
-                        Discover top study destinations with comprehensive support from application to arrival.
+                        Choose from accredited fast-track programs and discover top study destinations
+                        with comprehensive support from application to arrival.
                     </p>
-                </div>
+                </AnimatedSection>
 
-                <div className="programs-tabs">
-                    <h3 className="programs-tab-title">
-                        <span className="tab-icon">🎓</span>
-                        Fast-Track Graduation
-                    </h3>
-                    <div className="programs-grid">
-                        {graduationPrograms.map((program, index) => (
-                            <ProgramCard key={index} {...program} />
-                        ))}
+                {/* Fast-Track Graduation Section */}
+                <div className="bento-section">
+                    <AnimatedSection className="bento-header">
+                        <div className="bento-header-icon">🎓</div>
+                        <div>
+                            <h3 className="bento-header-title">Fast-Track Graduation</h3>
+                            <p className="bento-header-subtitle">Accelerate your path to a degree</p>
+                        </div>
+                    </AnimatedSection>
+
+                    <div className="bento-grid bento-grid--graduation">
+                        <BentoCard
+                            title="Accelerated BA"
+                            description="Complete your bachelor's degree in less time with our intensive, accredited programs."
+                            features={['2-3 Year Completion', 'Fully Accredited', 'Flexible Schedule']}
+                            icon="⚡"
+                            gradient="var(--gradient-cyan)"
+                            size="large"
+                            delay={0}
+                        />
+                        <BentoCard
+                            title="Credit Transfer"
+                            description="Move your existing credits seamlessly to accelerate completion."
+                            features={['Easy Evaluation', 'Partner Universities', 'Maximum Transfer']}
+                            icon="🔄"
+                            gradient="var(--gradient-primary)"
+                            size="medium"
+                            delay={100}
+                        />
+                        <BentoCard
+                            title="Online-to-Campus"
+                            description="Start online and graduate with an on-campus experience."
+                            features={['Hybrid Learning', 'Campus Immersion', 'Global Network']}
+                            icon="💻"
+                            gradient="var(--gradient-gold)"
+                            size="medium"
+                            delay={200}
+                        />
                     </div>
                 </div>
 
-                <div className="programs-tabs">
-                    <h3 className="programs-tab-title">
-                        <span className="tab-icon">✈️</span>
-                        Study Abroad
-                    </h3>
-                    <div className="programs-grid programs-grid--4">
-                        {studyAbroadPrograms.map((program, index) => (
-                            <ProgramCard key={index} {...program} />
-                        ))}
+                {/* Study Abroad Section */}
+                <div className="bento-section">
+                    <AnimatedSection className="bento-header">
+                        <div className="bento-header-icon">✈️</div>
+                        <div>
+                            <h3 className="bento-header-title">Study Abroad</h3>
+                            <p className="bento-header-subtitle">Your gateway to global education</p>
+                        </div>
+                    </AnimatedSection>
+
+                    <div className="bento-grid bento-grid--abroad">
+                        <BentoCard
+                            title="United Kingdom"
+                            description="Access world-renowned universities with comprehensive UK admission support."
+                            features={['Top Universities', 'Quick Visa', 'Post-Study Work']}
+                            icon="🇬🇧"
+                            gradient="linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)"
+                            size="medium"
+                            delay={0}
+                        />
+                        <BentoCard
+                            title="Canada"
+                            description="Discover co-op programs and work-study pathways in Canada's top institutions."
+                            features={['Co-op Programs', 'PR Pathways', 'Affordable']}
+                            icon="🇨🇦"
+                            gradient="linear-gradient(135deg, #dc2626 0%, #f87171 100%)"
+                            size="medium"
+                            delay={100}
+                        />
+                        <BentoCard
+                            title="Australia"
+                            description="Experience streamlined enrollment and quality education in Australia."
+                            features={['Easy Process', 'Work Rights', 'Quality Life']}
+                            icon="🇦🇺"
+                            gradient="linear-gradient(135deg, #059669 0%, #34d399 100%)"
+                            size="medium"
+                            delay={200}
+                        />
+                        <BentoCard
+                            title="Visa & SOP"
+                            description="Get personalized document preparation and visa application support."
+                            features={['SOP Writing', 'Visa Guidance', 'Interview Prep']}
+                            icon="📋"
+                            gradient="linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)"
+                            size="medium"
+                            delay={300}
+                        />
                     </div>
                 </div>
             </div>
@@ -291,72 +334,102 @@ const Programs: React.FC = () => {
     );
 };
 
-// ==================== PROCESS ====================
-interface ProcessStepProps {
+// ==================== PROCESS TIMELINE ====================
+interface TimelineStepProps {
     number: number;
     title: string;
     description: string;
     icon: string;
+    delay: number;
 }
 
-const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, icon }) => (
-    <div className="process-step">
-        <div className="process-step-number">{number}</div>
-        <div className="process-step-icon">{icon}</div>
-        <h4 className="process-step-title">{title}</h4>
-        <p className="process-step-description">{description}</p>
-    </div>
-);
+const TimelineStep: React.FC<TimelineStepProps> = ({ number, title, description, icon, delay }) => {
+    const { ref, isVisible } = useScrollReveal();
+
+    return (
+        <div
+            ref={ref}
+            className={`timeline-step ${isVisible ? 'is-visible' : ''}`}
+            style={{ animationDelay: `${delay}ms` }}
+        >
+            <div className="timeline-number">{number}</div>
+            <div className="timeline-content">
+                <div className="timeline-icon">{icon}</div>
+                <h4 className="timeline-title">{title}</h4>
+                <p className="timeline-description">{description}</p>
+            </div>
+        </div>
+    );
+};
 
 const Process: React.FC = () => {
-    const graduationSteps: ProcessStepProps[] = [
-        { number: 1, title: 'Apply Online', description: 'Submit your application with transcripts and documents through our easy portal.', icon: '📝' },
-        { number: 2, title: 'Academic Evaluation', description: 'Our team reviews your credits and creates a personalized acceleration plan.', icon: '🔍' },
-        { number: 3, title: 'Enroll', description: 'Complete enrollment and begin your accelerated academic journey.', icon: '✅' },
-        { number: 4, title: 'Graduate', description: 'Earn your accredited degree and step into your future with confidence.', icon: '🎓' }
+    const graduationSteps = [
+        { title: 'Apply Online', description: 'Submit your application with transcripts through our easy portal.', icon: '📝' },
+        { title: 'Academic Evaluation', description: 'We review your credits and create a personalized acceleration plan.', icon: '🔍' },
+        { title: 'Enroll', description: 'Complete enrollment and begin your accelerated academic journey.', icon: '✅' },
+        { title: 'Graduate', description: 'Earn your accredited degree and step into your future with confidence.', icon: '🎓' },
     ];
 
-    const studyAbroadSteps: ProcessStepProps[] = [
-        { number: 1, title: 'Course Consultation', description: 'Discuss your goals and get personalized university recommendations.', icon: '💬' },
-        { number: 2, title: 'University Admission', description: 'We handle your applications, SOPs, and secure admission offers.', icon: '🏫' },
-        { number: 3, title: 'Visa Processing', description: 'Complete visa documentation and interview preparation support.', icon: '📋' },
-        { number: 4, title: 'Fly Abroad', description: "Pre-departure briefing and you're ready to begin your global journey!", icon: '✈️' }
+    const studyAbroadSteps = [
+        { title: 'Consultation', description: 'Discuss your goals and get personalized university recommendations.', icon: '💬' },
+        { title: 'Admission', description: 'We handle applications, SOPs, and secure admission offers.', icon: '🏫' },
+        { title: 'Visa Processing', description: 'Complete visa documentation and interview preparation support.', icon: '📋' },
+        { title: 'Fly Abroad', description: "Pre-departure briefing and you're ready for your global journey!", icon: '✈️' },
     ];
 
     return (
-        <section className="process section">
+        <section className="process section" id="process">
+            <div className="section-glow section-glow--right" />
+
             <div className="container">
-                <div className="section-header">
-                    <span className="section-tag">How It Works</span>
+                <AnimatedSection className="section-header">
+                    <span className="section-tag">
+                        <span className="tag-dot" />
+                        How It Works
+                    </span>
                     <h2 className="section-title">
-                        Your Path to Graduation
-                        <span className="gradient-text"> From Dream to Destination</span>
+                        Your Path to
+                        <span className="gradient-text"> Success</span>
                     </h2>
                     <p className="section-subtitle">
-                        A streamlined process designed to get you to graduation faster.
-                        We guide you every step of the way to your international education.
+                        A streamlined process designed to get you to graduation faster
+                        and guide you every step of the way.
                     </p>
-                </div>
+                </AnimatedSection>
 
                 <div className="process-tracks">
                     <div className="process-track">
-                        <h3 className="process-track-title">
-                            <span>🎓</span> Fast-Track Graduation
-                        </h3>
-                        <div className="process-steps">
-                            {graduationSteps.map((step) => (
-                                <ProcessStep key={step.number} {...step} />
+                        <div className="track-header">
+                            <span className="track-icon">🎓</span>
+                            <h3>Fast-Track Graduation</h3>
+                        </div>
+                        <div className="timeline">
+                            <div className="timeline-line" />
+                            {graduationSteps.map((step, index) => (
+                                <TimelineStep
+                                    key={index}
+                                    number={index + 1}
+                                    {...step}
+                                    delay={index * 100}
+                                />
                             ))}
                         </div>
                     </div>
 
                     <div className="process-track">
-                        <h3 className="process-track-title">
-                            <span>✈️</span> Study Abroad
-                        </h3>
-                        <div className="process-steps">
-                            {studyAbroadSteps.map((step) => (
-                                <ProcessStep key={step.number} {...step} />
+                        <div className="track-header">
+                            <span className="track-icon">✈️</span>
+                            <h3>Study Abroad</h3>
+                        </div>
+                        <div className="timeline">
+                            <div className="timeline-line" />
+                            {studyAbroadSteps.map((step, index) => (
+                                <TimelineStep
+                                    key={index}
+                                    number={index + 1}
+                                    {...step}
+                                    delay={index * 100}
+                                />
                             ))}
                         </div>
                     </div>
@@ -370,76 +443,69 @@ const Process: React.FC = () => {
 interface TestimonialProps {
     quote: string;
     name: string;
-    program?: string;
+    program: string;
+    delay: number;
 }
 
-const TestimonialCard: React.FC<TestimonialProps> = ({ quote, name, program }) => (
-    <div className="testimonial-card">
-        <div className="testimonial-stars">
-            {[...Array(5)].map((_, i) => <span key={i}>⭐</span>)}
-        </div>
-        <blockquote className="testimonial-quote">"{quote}"</blockquote>
-        <div className="testimonial-author">
-            <div className="testimonial-avatar">{name.charAt(0)}</div>
-            <div className="testimonial-info">
-                <span className="testimonial-name">{name}</span>
-                {program && <span className="testimonial-program">{program}</span>}
+const TestimonialCard: React.FC<TestimonialProps> = ({ quote, name, program, delay }) => {
+    const { ref, isVisible } = useScrollReveal();
+
+    return (
+        <div
+            ref={ref}
+            className={`testimonial-card ${isVisible ? 'is-visible' : ''}`}
+            style={{ animationDelay: `${delay}ms` }}
+        >
+            <div className="testimonial-quote-mark">"</div>
+            <blockquote className="testimonial-quote">{quote}</blockquote>
+            <div className="testimonial-author">
+                <div className="testimonial-avatar">
+                    <span>{name.charAt(0)}</span>
+                </div>
+                <div className="testimonial-info">
+                    <span className="testimonial-name">{name}</span>
+                    <span className="testimonial-program">{program}</span>
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 const Testimonials: React.FC = () => {
-    const testimonials: TestimonialProps[] = [
-        {
-            quote: "Gradfast shortened my degree path without losing quality. I graduated a full year early!",
-            name: "Priya Sharma",
-            program: "Accelerated BA Graduate"
-        },
-        {
-            quote: "The credit transfer process was seamless. I saved time and money while getting a quality education.",
-            name: "Rahul Kumar",
-            program: "Credit Transfer"
-        },
-        {
-            quote: "Online-to-campus blend gave me the flexibility I needed. The campus experience was worth the wait!",
-            name: "Ananya Mehta",
-            program: "Hybrid Program"
-        },
-        {
-            quote: "Gradfast secured my Canada admission and visa in record time. Now I'm living my dream!",
-            name: "Aarav Malhotra",
-            program: "Study Abroad - Canada"
-        },
-        {
-            quote: "The UK visa process seemed daunting, but Gradfast made it effortless. Highly recommend!",
-            name: "Neha Kapoor",
-            program: "Study Abroad - UK"
-        },
-        {
-            quote: "From SOP to visa stamp, the team was with me every step. Australia here I am!",
-            name: "Vikram Singh",
-            program: "Study Abroad - Australia"
-        }
+    const testimonials = [
+        { quote: "Gradfast shortened my degree path without losing quality. I graduated a full year early!", name: "Priya Sharma", program: "Accelerated BA" },
+        { quote: "The credit transfer process was seamless. I saved time and money while getting quality education.", name: "Rahul Kumar", program: "Credit Transfer" },
+        { quote: "Online-to-campus blend gave me the flexibility I needed. The campus experience was worth it!", name: "Ananya Mehta", program: "Hybrid Program" },
+        { quote: "Gradfast secured my Canada admission and visa in record time. Now I'm living my dream!", name: "Aarav Malhotra", program: "Study Abroad - Canada" },
+        { quote: "The UK visa process seemed daunting, but Gradfast made it effortless. Highly recommend!", name: "Neha Kapoor", program: "Study Abroad - UK" },
+        { quote: "From SOP to visa stamp, the team was with me every step. Australia here I am!", name: "Vikram Singh", program: "Study Abroad - Australia" },
     ];
 
     return (
-        <section className="testimonials section">
+        <section className="testimonials section" id="testimonials">
             <div className="container">
-                <div className="section-header">
-                    <span className="section-tag">Success Stories</span>
+                <AnimatedSection className="section-header">
+                    <span className="section-tag">
+                        <span className="tag-dot" />
+                        Success Stories
+                    </span>
                     <h2 className="section-title">
-                        What Our Students Say
+                        What Our Students
+                        <span className="gradient-text"> Say</span>
                     </h2>
                     <p className="section-subtitle">
                         Real stories from students who accelerated their academic dreams
                         and achieved their global education goals.
                     </p>
-                </div>
+                </AnimatedSection>
 
                 <div className="testimonials-grid">
                     {testimonials.map((testimonial, index) => (
-                        <TestimonialCard key={index} {...testimonial} />
+                        <TestimonialCard
+                            key={index}
+                            {...testimonial}
+                            delay={index * 100}
+                        />
                     ))}
                 </div>
             </div>
@@ -450,34 +516,37 @@ const Testimonials: React.FC = () => {
 // ==================== CTA ====================
 const CTA: React.FC = () => {
     return (
-        <section className="cta section">
+        <section className="cta section" id="contact">
             <div className="container">
-                <div className="cta-card">
-                    <div className="cta-content">
-                        <h2 className="cta-title">
-                            Ready to Fast-Track Your Degree?
-                            <span className="gradient-text"> Go Global with Gradfast</span>
-                        </h2>
-                        <p className="cta-subtitle">
-                            Take the first step towards your accelerated graduation today.
-                            Personalized study-abroad planning for students and families.
-                        </p>
-                        <div className="cta-buttons">
-                            <a href="/contact" className="btn btn-primary btn-lg">
-                                <span>Book Free Consultation</span>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
-                            </a>
-                            <a href="/universities" className="btn btn-outline btn-lg">
-                                See Partner Universities
-                            </a>
+                <AnimatedSection>
+                    <div className="cta-card">
+                        <div className="cta-glow cta-glow--1" />
+                        <div className="cta-glow cta-glow--2" />
+                        <div className="cta-content">
+                            <span className="cta-tag">Ready to Start?</span>
+                            <h2 className="cta-title">
+                                Fast-Track Your Degree
+                                <br />
+                                <span className="gradient-text">Go Global with Gradfast</span>
+                            </h2>
+                            <p className="cta-subtitle">
+                                Take the first step towards your accelerated graduation today.
+                                Personalized planning for students and families.
+                            </p>
+                            <div className="cta-buttons">
+                                <a href="/contact" className="btn btn-primary btn-xl btn-glow">
+                                    <span>Book Free Consultation</span>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                                <a href="/universities" className="btn btn-outline btn-xl">
+                                    See Partner Universities
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div className="cta-decoration">
-                        <div className="cta-glow"></div>
-                    </div>
-                </div>
+                </AnimatedSection>
             </div>
         </section>
     );
@@ -499,14 +568,24 @@ const Footer: React.FC = () => {
                         </p>
                         <div className="footer-contact">
                             <a href="https://wa.me/919966207111" className="contact-link">
-                                <span>📞</span> +91 99662 07111
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                </svg>
+                                +91 99662 07111
                             </a>
                             <a href="https://wa.me/919966307111" className="contact-link">
-                                <span>📞</span> +91 99663 07111
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                </svg>
+                                +91 99663 07111
                             </a>
-                            <a href="#" className="contact-link">
-                                <span>📍</span> Hyderabad, Telangana
-                            </a>
+                            <span className="contact-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Hyderabad, Telangana
+                            </span>
                         </div>
                     </div>
 
@@ -533,30 +612,37 @@ const Footer: React.FC = () => {
                     <div className="footer-links">
                         <h4>Support</h4>
                         <ul>
-                            <li><a href="/help-center">Help Center</a></li>
                             <li><a href="/faq">FAQs</a></li>
                             <li><a href="/contact">Contact Us</a></li>
                             <li><a href="/privacy">Privacy Policy</a></li>
-                        </ul>
-                    </div>
-
-                    <div className="footer-links">
-                        <h4>Connect</h4>
-                        <ul>
-                            <li><a href="#">Facebook</a></li>
-                            <li><a href="#">Instagram</a></li>
-                            <li><a href="#">LinkedIn</a></li>
-                            <li><a href="#">Twitter</a></li>
+                            <li><a href="/terms">Terms of Service</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div className="footer-bottom">
                     <p>© 2026 Gradfast. All rights reserved.</p>
-                    <div className="footer-legal">
-                        <a href="/terms">Terms of Service</a>
-                        <a href="/privacy">Privacy Policy</a>
-                        <a href="/cookies">Cookie Policy</a>
+                    <div className="footer-social">
+                        <a href="#" aria-label="Facebook" className="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram" className="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn" className="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter" className="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
