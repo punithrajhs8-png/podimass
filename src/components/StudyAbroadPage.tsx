@@ -234,7 +234,7 @@ const StudyAbroadCountries: React.FC = () => {
                             title="United Kingdom"
                             description="Access world-renowned universities with comprehensive UK admission support. Study at Oxford, Cambridge, and more."
                             features={['Top Universities', 'Quick Visa Process', 'Post-Study Work Visa', '2-Year Stay Back']}
-                            icon="🇬🇧"
+                            icon="UK"
                             gradient="linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)"
                             size="medium"
                             delay={0}
