@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './GradfastLanding.css';
+import Ballpit from './Ballpit';
 
 // ==================== SCROLL ANIMATION HOOK ====================
 const useScrollReveal = () => {
@@ -97,14 +98,21 @@ const Header: React.FC = () => {
 const Hero: React.FC = () => {
     return (
         <section className="hero">
-            {/* Animated Background */}
-            <div className="hero-bg">
-                <div className="hero-glow hero-glow--cyan" />
-                <div className="hero-glow hero-glow--purple" />
-                <div className="hero-glow hero-glow--pink" />
-                <div className="hero-grid" />
-                <div className="hero-noise" />
+            {/* Ballpit Background */}
+            <div className="hero-ballpit">
+                <Ballpit
+                    className="ballpit-canvas"
+                    count={80}
+                    colors={[0xf97316, 0xec4899, 0xa855f7, 0xfbbf24]}
+                    gravity={0.3}
+                    minSize={0.4}
+                    maxSize={1.2}
+                    followCursor={true}
+                />
             </div>
+
+            {/* Overlay for text readability */}
+            <div className="hero-overlay" />
 
             <div className="container hero-container">
                 <AnimatedSection className="hero-content">
