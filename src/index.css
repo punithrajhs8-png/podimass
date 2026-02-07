@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Forest Green & Warm Brown Theme */
-  --color-bg-primary: #414833;
-  --color-bg-secondary: #3a4130;
-  --color-bg-tertiary: #4a5240;
-  --color-bg-card: rgba(127, 85, 57, 0.1);
-  --color-bg-card-hover: rgba(127, 85, 57, 0.15);
+  /* Warm Tan Theme */
+  --color-bg-primary: #a68a64;
+  --color-bg-secondary: #9a7e5a;
+  --color-bg-tertiary: #b29670;
+  --color-bg-card: rgba(127, 85, 57, 0.15);
+  --color-bg-card-hover: rgba(127, 85, 57, 0.25);
 
   /* Text Colors - Golden/Honey Tones */
   --color-text-primary: #dda15e;
@@ -30,7 +30,7 @@
   --gradient-warm: linear-gradient(135deg, #dda15e 0%, #bc6c25 50%, #7f5539 100%);
 
   /* Glass Effect - Dark Forest */
-  --glass-bg: rgba(65, 72, 51, 0.8);
+  --glass-bg: rgba(166, 138, 100, 0.8);
   --glass-border: rgba(127, 85, 57, 0.3);
   --glass-blur: blur(20px);
 

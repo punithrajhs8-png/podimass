@@ -22,7 +22,7 @@
 }
 
 .header--scrolled {
-    background: rgba(65, 72, 51, 0.95);
+    background: rgba(166, 138, 100, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
@@ -247,7 +247,7 @@
     align-items: center;
     gap: 0.75rem;
     padding: 0.5rem 1.25rem;
-    background: rgba(65, 72, 51, 0.8);
+    background: rgba(166, 138, 100, 0.8);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-sm);
@@ -319,7 +319,7 @@
     flex-direction: column;
     align-items: center;
     padding: 1.5rem 2rem;
-    background: rgba(65, 72, 51, 0.8);
+    background: rgba(166, 138, 100, 0.8);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
@@ -331,7 +331,7 @@
 .stat-card:hover {
     box-shadow: var(--shadow-lg);
     transform: translateY(-4px);
-    background: rgba(74, 82, 64, 0.9);
+    background: rgba(178, 150, 112, 0.95);
 }
 
 .stat-value {
@@ -431,7 +431,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: rgba(65, 72, 51, 0.8);
+    background: rgba(166, 138, 100, 0.8);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-sm);
@@ -481,7 +481,7 @@
     font-size: 1rem;
     font-weight: 600;
     color: var(--color-text-secondary);
-    background: rgba(65, 72, 51, 0.6);
+    background: rgba(166, 138, 100, 0.6);
     border: 2px solid var(--glass-border);
     border-radius: var(--radius-full);
     cursor: pointer;
@@ -489,7 +489,7 @@
 }
 
 .toggle-btn:hover {
-    background: rgba(74, 82, 64, 0.8);
+    background: rgba(178, 150, 112, 0.95);
     border-color: var(--color-gold);
     color: var(--color-gold);
     transform: translateY(-2px);
@@ -530,7 +530,7 @@
     gap: 1rem;
     margin-bottom: 2rem;
     padding: 1.25rem 1.5rem;
-    background: rgba(65, 72, 51, 0.8);
+    background: rgba(166, 138, 100, 0.8);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
@@ -574,7 +574,7 @@
 .bento-card {
     position: relative;
     padding: 2rem;
-    background: rgba(65, 72, 51, 0.8);
+    background: rgba(166, 138, 100, 0.8);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
@@ -593,7 +593,7 @@
 .bento-card:hover {
     box-shadow: var(--shadow-lg);
     transform: translateY(-8px) !important;
-    background: rgba(74, 82, 64, 0.95);
+    background: rgba(178, 150, 112, 0.95);
 }
 
 .bento-card-glow {
@@ -699,7 +699,7 @@
     gap: 1rem;
     margin-bottom: 2rem;
     padding: 1rem 1.5rem;
-    background: rgba(65, 72, 51, 0.8);
+    background: rgba(166, 138, 100, 0.8);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
@@ -772,7 +772,7 @@
 
 .timeline-content {
     padding: 1.5rem;
-    background: rgba(65, 72, 51, 0.8);
+    background: rgba(166, 138, 100, 0.8);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
@@ -782,7 +782,7 @@
 
 .timeline-step:hover .timeline-content {
     box-shadow: var(--shadow-md);
-    background: rgba(74, 82, 64, 0.95);
+    background: rgba(178, 150, 112, 0.95);
 }
 
 .timeline-icon {
@@ -817,7 +817,7 @@
 .testimonial-card {
     position: relative;
     padding: 2rem;
-    background: rgba(65, 72, 51, 0.8);
+    background: rgba(166, 138, 100, 0.8);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
@@ -835,7 +835,7 @@
 .testimonial-card:hover {
     box-shadow: var(--shadow-lg);
     transform: translateY(-4px) !important;
-    background: rgba(74, 82, 64, 0.95);
+    background: rgba(178, 150, 112, 0.95);
 }
 
 .testimonial-quote-mark {
@@ -906,7 +906,7 @@
 .cta-card {
     position: relative;
     padding: 5rem;
-    background: rgba(65, 72, 51, 0.8);
+    background: rgba(166, 138, 100, 0.8);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
@@ -944,7 +944,7 @@
 .cta-tag {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(65, 72, 51, 0.9);
+    background: rgba(166, 138, 100, 0.9);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-sm);
@@ -1067,7 +1067,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(74, 82, 64, 0.8);
+    background: rgba(178, 150, 112, 0.95);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
     color: var(--color-text-secondary);
