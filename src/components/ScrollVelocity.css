@@ -1,0 +1,64 @@
+/* ==================== SCROLL VELOCITY ==================== */
+
+.parallax {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    white-space: nowrap;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+}
+
+.scroller {
+    display: flex !important;
+    white-space: nowrap !important;
+    flex-wrap: nowrap !important;
+    font-family: inherit;
+    /* Use site font */
+    font-weight: 800;
+    /* Bold from original request */
+    text-transform: capitalize;
+    line-height: 1.2;
+}
+
+.scroller span {
+    display: block;
+    flex-shrink: 0;
+    padding-right: 3rem;
+    /* Spacing between copies */
+}
+
+/* Custom styling for the gradient text passed via className */
+.velocity-gradient-text {
+    font-size: clamp(3rem, 8vw, 6rem);
+    /* Responsive font size */
+    font-weight: 900;
+    letter-spacing: -0.02em;
+
+    /* Gradient - Vibrant Light Orange */
+    background: linear-gradient(90deg, #ffab00, #ffd740, #ff9100, #ffab00);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: velocityGradient 4s ease-in-out infinite;
+}
+
+@keyframes velocityGradient {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Ensure container fits */
+.hero-velocity-title {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
