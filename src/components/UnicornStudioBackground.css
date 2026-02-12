@@ -7,15 +7,35 @@
     height: 100%;
     z-index: 0;
     overflow: hidden;
+    background: transparent;
 }
 
 .unicorn-studio-embed {
     width: 100% !important;
     height: 100% !important;
     min-height: 100%;
+    position: relative;
 }
 
-.unicorn-studio-embed > * {
+/* Ensure the Unicorn Studio iframe/canvas fills the container */
+.unicorn-studio-embed > *,
+.unicorn-studio-embed iframe,
+.unicorn-studio-embed canvas {
     width: 100% !important;
     height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    border: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .unicorn-studio-bg {
+        min-height: 100vh;
+    }
+    
+    .unicorn-studio-embed {
+        min-height: 100vh;
+    }
 }

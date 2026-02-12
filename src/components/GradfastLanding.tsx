@@ -104,6 +104,7 @@ const Header: React.FC = () => {
 const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
     return (
         <section className="hero">
+            <UnicornStudioBackground />
 
             <div className="container hero-container">
                 <AnimatedSection className="hero-content">
@@ -590,10 +591,6 @@ const GradfastLanding: React.FC = () => {
             extraScale={1.2}
         >
             <div className={`gradfast-app ${currentPage === 'fasttrack' ? 'gradfast-app--fasttrack' : ''}`}>
-                {/* Animated background only for Fast Track page */}
-                {currentPage === 'fasttrack' && (
-                    <UnicornStudioBackground />
-                )}
                 <Header />
                 <main>
                     {currentPage === 'fasttrack' ? (
