@@ -3,7 +3,6 @@ import './GradfastLanding.css';
 import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
 import Particles from './Particles';
-import ScrollVelocity from './ScrollVelocity';
 
 
 // ==================== SCROLL ANIMATION HOOK ====================
@@ -105,29 +104,23 @@ const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
     return (
         <section className="hero">
             <Particles
-                particleCount={200}
-                particleSpread={10}
-                speed={0.1}
-                particleColors={["#ff7b00"]}
+                particleCount={150}
+                particleSpread={15}
+                speed={0.15}
+                particleColors={["#ff9500", "#ff7b00", "#ff5500"]}
                 moveParticlesOnHover={true}
-                particleHoverFactor={1.9}
+                particleHoverFactor={2}
                 alphaParticles={false}
-                particleBaseSize={330}
-                sizeRandomness={1.1}
-                cameraDistance={15}
+                particleBaseSize={400}
+                sizeRandomness={0.8}
+                cameraDistance={12}
                 disableRotation={false}
             />
             <div className="container hero-container">
                 <AnimatedSection className="hero-content">
-                    <div className="hero-velocity-title">
-                        <ScrollVelocity
-                            texts={['Accelerate Your Degree Journey']}
-                            velocity={50}
-                            className="velocity-gradient-text"
-                            damping={50}
-                            stiffness={400}
-                        />
-                    </div>
+                    <h1 className="hero-title">
+                        Accelerate Your <span className="gradient-text">Degree Journey</span>
+                    </h1>
 
                     <p className="hero-subtitle">
                         Complete your accredited degree faster through credit transfer and
