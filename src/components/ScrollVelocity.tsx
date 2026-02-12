@@ -114,13 +114,13 @@ export const ScrollVelocity: React.FC<ScrollVelocityProps> = ({
             return mod + min;
         }
 
-        const x = useTransform(baseX, v => {
+const x = useTransform(baseX, (v: number) => {
             if (copyWidth === 0) return '0px';
             return `${wrap(-copyWidth, 0, v)}px`;
         });
 
         const directionFactor = useRef<number>(1);
-        useAnimationFrame((_t, delta) => {
+        useAnimationFrame((_t: number, delta: number) => {
             let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
             // Maintain direction based on velocity

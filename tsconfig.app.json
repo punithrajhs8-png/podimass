@@ -6,12 +6,16 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "types": ["vite/client", "node"],
-    "typeRoots": ["./node_modules/@types", "./node_modules"],
     "skipLibCheck": true,
     "resolveJsonModule": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "framer-motion": ["./node_modules/framer-motion"],
+      "lenis": ["./node_modules/lenis"]
+    },
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
