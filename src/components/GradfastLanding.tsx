@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './GradfastLanding.css';
 import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
-import UnicornStudioBackground from './UnicornStudioBackground';
+
 import ScrollVelocity from './ScrollVelocity';
 
 
@@ -104,8 +104,6 @@ const Header: React.FC = () => {
 const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
     return (
         <section className="hero">
-            <UnicornStudioBackground />
-
             <div className="container hero-container">
                 <AnimatedSection className="hero-content">
                     <div className="hero-velocity-title">
