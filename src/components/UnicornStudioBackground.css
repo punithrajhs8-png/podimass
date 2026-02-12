@@ -14,28 +14,42 @@
     width: 100% !important;
     height: 100% !important;
     min-height: 100%;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /* Ensure the Unicorn Studio iframe/canvas fills the container */
 .unicorn-studio-embed > *,
 .unicorn-studio-embed iframe,
-.unicorn-studio-embed canvas {
+.unicorn-studio-embed canvas,
+.unicorn-studio-embed > div,
+.unicorn-studio-embed > canvas {
     width: 100% !important;
     height: 100% !important;
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
     border: none !important;
+    display: block !important;
 }
 
 /* Responsive adjustments */
+@media (max-width: 1440px) {
+    .unicorn-studio-embed {
+        transform: scale(1);
+        transform-origin: center center;
+    }
+}
+
 @media (max-width: 768px) {
     .unicorn-studio-bg {
-        min-height: 100vh;
+        min-height: 100%;
     }
     
     .unicorn-studio-embed {
-        min-height: 100vh;
+        min-height: 100%;
     }
 }
