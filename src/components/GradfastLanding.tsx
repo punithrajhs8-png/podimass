@@ -3,7 +3,7 @@ import './GradfastLanding.css';
 import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
 import Particles from './Particles';
-import Folder from './Folder';
+import TestimonialFolder from './TestimonialFolder';
 
 
 // ==================== SCROLL ANIMATION HOOK ====================
@@ -365,12 +365,6 @@ const Process: React.FC = () => {
 
 // ==================== TESTIMONIALS ====================
 const Testimonials: React.FC = () => {
-    const testimonials = [
-        { quote: "Gradfast shortened my degree path without losing quality. I graduated a full year early!", name: "Priya Sharma", program: "Accelerated BA" },
-        { quote: "The credit transfer process was seamless. I saved time and money while getting quality education.", name: "Rahul Kumar", program: "Credit Transfer" },
-        { quote: "Online-to-campus blend gave me the flexibility I needed. The campus experience was worth it!", name: "Ananya Mehta", program: "Hybrid Program" },
-    ];
-
     return (
         <section className="testimonials section" id="testimonials">
             <div className="container">
@@ -389,28 +383,7 @@ const Testimonials: React.FC = () => {
                     </p>
                 </AnimatedSection>
 
-                <div className="testimonials-grid">
-                    {testimonials.map((testimonial, index) => (
-                        <AnimatedSection key={index} delay={index * 100}>
-                            <Folder
-                                size={2}
-                                color="#ff6600"
-                                items={[
-                                    <div className="folder-paper-content">
-                                        <p className="folder-quote">"{testimonial.quote}"</p>
-                                    </div>,
-                                    <div className="folder-paper-content">
-                                        <span className="folder-name">{testimonial.name}</span>
-                                        <span className="folder-program">{testimonial.program}</span>
-                                    </div>,
-                                    <div className="folder-paper-content avatar">
-                                        <span>{testimonial.name.charAt(0)}</span>
-                                    </div>
-                                ]}
-                            />
-                        </AnimatedSection>
-                    ))}
-                </div>
+                <TestimonialFolder />
             </div>
         </section>
     );

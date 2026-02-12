@@ -1,0 +1,258 @@
+.testimonial-folder {
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #ff6600 0%, #ff8533 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(255, 102, 0, 0.3);
+}
+
+.testimonial-folder-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px 32px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.testimonial-folder-header:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.testimonial-folder-header.open {
+    border-bottom-color: transparent;
+}
+
+.folder-icon {
+    font-size: 28px;
+}
+
+.folder-label {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+.folder-arrow {
+    font-size: 14px;
+    color: white;
+    opacity: 0.8;
+}
+
+.testimonial-folder-content {
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.testimonial-card-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 300ms ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.testimonial-card-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-card-item.expanded {
+    border-color: #ff6600;
+}
+
+.card-preview {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+}
+
+.card-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6600 0%, #ff8533 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.card-avatar span {
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+}
+
+.card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.card-program {
+    font-size: 14px;
+    color: #666;
+}
+
+.card-expand-icon {
+    font-size: 24px;
+    font-weight: 300;
+    color: #ff6600;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-expanded {
+    padding: 0 24px 24px 24px;
+    animation: fadeIn 300ms ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-quote {
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.quote-mark {
+    font-size: 40px;
+    color: #ff6600;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+.quote-mark.end {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+
+.card-quote p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin: 8px 0;
+    font-style: italic;
+}
+
+.card-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6600 0%, #ff8533 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.author-avatar span {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+}
+
+.author-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.author-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.author-program {
+    font-size: 13px;
+    color: #ff6600;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .testimonial-folder {
+        max-width: 100%;
+        margin: 0 16px;
+    }
+
+    .testimonial-folder-header {
+        padding: 20px 24px;
+    }
+
+    .folder-label {
+        font-size: 16px;
+    }
+
+    .folder-icon {
+        font-size: 24px;
+    }
+
+    .testimonial-folder-content {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .card-preview {
+        padding: 16px;
+    }
+
+    .card-avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .card-avatar span {
+        font-size: 20px;
+    }
+
+    .card-name {
+        font-size: 16px;
+    }
+
+    .card-quote p {
+        font-size: 14px;
+    }
+}
