@@ -10,12 +10,7 @@
     "resolveJsonModule": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
-    "baseUrl": ".",
-    "paths": {
-      "framer-motion": ["./node_modules/framer-motion"],
-      "lenis": ["./node_modules/lenis"]
-    },
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
