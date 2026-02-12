@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './GradfastLanding.css';
+import Stack from './Stack';
 
 // ==================== SCROLL ANIMATION HOOK ====================
 const useScrollReveal = () => {
@@ -434,6 +435,65 @@ const StudyAbroadCTA: React.FC = () => {
     );
 };
 
+// ==================== STUDY ABROAD GALLERY ====================
+const StudyAbroadGallery: React.FC = () => {
+    const images = [
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500&auto=format",
+        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=500&auto=format",
+        "https://images.unsplash.com/photo-1562774053-701939374585?w=500&auto=format",
+        "https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=500&auto=format"
+    ];
+
+    return (
+        <section className="stack-gallery section" id="gallery">
+            <div className="container">
+                <AnimatedSection className="section-header">
+                    <span className="section-tag">
+                        <span className="tag-dot" />
+                        Campus Life
+                    </span>
+                    <h2 className="section-title">
+                        Your Future
+                        <span className="gradient-text"> Campus</span>
+                    </h2>
+                    <p className="section-subtitle">
+                        Explore universities worldwide. Drag or click the cards to browse.
+                    </p>
+                </AnimatedSection>
+
+                <div className="stack-section">
+                    <div className="stack-wrapper">
+                        <Stack
+                            randomRotation={false}
+                            sensitivity={200}
+                            sendToBackOnClick={true}
+                            cards={images.map((src, i) => (
+                                <img
+                                    key={i}
+                                    src={src}
+                                    alt={`University campus ${i + 1}`}
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                />
+                            ))}
+                            autoplay={true}
+                            autoplayDelay={3000}
+                            pauseOnHover={true}
+                        />
+                    </div>
+                    <div className="stack-content">
+                        <h3>World-Class Universities</h3>
+                        <p>
+                            Study at prestigious universities in Canada, UK, Australia, and more.
+                            Experience world-class education with cutting-edge facilities and
+                            diverse campus communities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
 // ==================== MAIN STUDY ABROAD PAGE ====================
 interface StudyAbroadPageProps {
     onSwitch: () => void;
@@ -445,6 +505,7 @@ const StudyAbroadPage: React.FC<StudyAbroadPageProps> = ({ onSwitch }) => {
             <StudyAbroadHero onSwitch={onSwitch} />
             <StudyAbroadCountries />
             <StudyAbroadProcess />
+            <StudyAbroadGallery />
             <StudyAbroadTestimonials />
             <StudyAbroadCTA />
         </>

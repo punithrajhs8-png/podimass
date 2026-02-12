@@ -1,57 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  /* Warm Tan Theme */
-  --color-bg-primary: #a68a64;
-  --color-bg-secondary: #9a7e5a;
-  --color-bg-tertiary: #b29670;
-  --color-bg-card: rgba(127, 85, 57, 0.15);
-  --color-bg-card-hover: rgba(127, 85, 57, 0.25);
+  /* Professional Modern Theme */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  /* Slate 50 */
+  --color-bg-tertiary: #f1f5f9;
+  /* Slate 100 */
+  --color-bg-card: #ffffff;
+  --color-bg-card-hover: #f8fafc;
 
-  /* Text Colors - Dark Forest Green */
-  --color-text-primary: #414833;
-  --color-text-secondary: #2d3324;
-  --color-text-muted: #576044;
+  /* Text Colors - Deep Slate */
+  --color-text-primary: #0f172a;
+  /* Slate 900 */
+  --color-text-secondary: #475569;
+  /* Slate 600 */
+  --color-text-muted: #94a3b8;
+  /* Slate 400 */
 
-  /* Accent Colors - Darker Earth Tones for Light Background */
-  --color-cyan: #414833;
-  --color-purple: #5a3e2b;
-  --color-pink: #7f5539;
-  --color-green: #2d3324;
-  --color-orange: #9c6644;
-  --color-gold: #5a3e2b;
+  /* Accent Colors - Professional & Vibrant */
+  --color-cyan: #0ea5e9;
+  --color-purple: #8b5cf6;
+  --color-pink: #ec4899;
+  --color-green: #10b981;
+  --color-orange: #f97316;
+  --color-gold: #fbbf24;
 
-  /* Gradients - Darker Warm Earth Tones */
-  --gradient-primary: linear-gradient(135deg, #7f5539 0%, #5a3e2b 100%);
-  --gradient-cyan: linear-gradient(135deg, #414833 0%, #2d3324 100%);
-  --gradient-gold: linear-gradient(135deg, #9c6644 0%, #7f5539 100%);
-  --gradient-green: linear-gradient(135deg, #414833 0%, #2d3324 100%);
-  --gradient-text: linear-gradient(90deg, #414833 0%, #5a3e2b 50%, #7f5539 100%);
-  --gradient-warm: linear-gradient(135deg, #7f5539 0%, #5a3e2b 50%, #414833 100%);
+  /* Gradients - Professional */
+  --gradient-primary: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --gradient-cyan: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --gradient-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --gradient-text: linear-gradient(90deg, #0f172a 0%, #2563eb 50%, #0f172a 100%);
+  --gradient-warm: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
 
-  /* Glass Effect - Dark Forest */
-  --glass-bg: rgba(166, 138, 100, 0.8);
-  --glass-border: rgba(127, 85, 57, 0.3);
-  --glass-blur: blur(20px);
+  /* Glass Effect - Clean White */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(226, 232, 240, 0.6);
+  --glass-blur: blur(12px);
 
   /* Shadows & Glows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.3);
-  --glow-orange: 0 4px 20px rgba(188, 108, 37, 0.4);
-  --glow-pink: 0 4px 20px rgba(221, 161, 94, 0.4);
-  --glow-purple: 0 4px 20px rgba(127, 85, 57, 0.4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --glow-orange: 0 4px 20px rgba(249, 115, 22, 0.3);
+  --glow-pink: 0 4px 20px rgba(236, 72, 153, 0.3);
+  --glow-purple: 0 4px 20px rgba(139, 92, 246, 0.3);
 
   /* Radius */
-  --radius-sm: 0.5rem;
-  --radius-md: 1rem;
-  --radius-lg: 1.5rem;
-  --radius-xl: 2rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
   --radius-full: 9999px;
 
   /* Spacing */
   --section-padding: 6rem;
-  --container-max: 1400px;
+  --container-max: 1280px;
 
   /* Transitions */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
