@@ -3,7 +3,7 @@ import './GradfastLanding.css';
 import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
 import Particles from './Particles';
-import TestimonialFolder from './TestimonialFolder';
+import SuccessStoriesModal from './SuccessStoriesModal';
 
 
 // ==================== SCROLL ANIMATION HOOK ====================
@@ -383,7 +383,7 @@ const Testimonials: React.FC = () => {
                     </p>
                 </AnimatedSection>
 
-                <TestimonialFolder />
+                <SuccessStoriesModal />
             </div>
         </section>
     );
