@@ -3,6 +3,7 @@ import './GradfastLanding.css';
 import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
 import Particles from './Particles';
+import Folder from './Folder';
 
 
 // ==================== SCROLL ANIMATION HOOK ====================
@@ -363,37 +364,6 @@ const Process: React.FC = () => {
 };
 
 // ==================== TESTIMONIALS ====================
-interface TestimonialProps {
-    quote: string;
-    name: string;
-    program: string;
-    delay: number;
-}
-
-const TestimonialCard: React.FC<TestimonialProps> = ({ quote, name, program, delay }) => {
-    const { ref, isVisible } = useScrollReveal();
-
-    return (
-        <div
-            ref={ref}
-            className={`testimonial-card ${isVisible ? 'is-visible' : ''}`}
-            style={{ animationDelay: `${delay}ms` }}
-        >
-            <div className="testimonial-quote-mark">"</div>
-            <blockquote className="testimonial-quote">{quote}</blockquote>
-            <div className="testimonial-author">
-                <div className="testimonial-avatar">
-                    <span>{name.charAt(0)}</span>
-                </div>
-                <div className="testimonial-info">
-                    <span className="testimonial-name">{name}</span>
-                    <span className="testimonial-program">{program}</span>
-                </div>
-            </div>
-        </div>
-    );
-};
-
 const Testimonials: React.FC = () => {
     const testimonials = [
         { quote: "Gradfast shortened my degree path without losing quality. I graduated a full year early!", name: "Priya Sharma", program: "Accelerated BA" },
@@ -421,11 +391,24 @@ const Testimonials: React.FC = () => {
 
                 <div className="testimonials-grid">
                     {testimonials.map((testimonial, index) => (
-                        <TestimonialCard
-                            key={index}
-                            {...testimonial}
-                            delay={index * 100}
-                        />
+                        <AnimatedSection key={index} delay={index * 100}>
+                            <Folder
+                                size={2}
+                                color="#ff6600"
+                                items={[
+                                    <div className="folder-paper-content">
+                                        <p className="folder-quote">"{testimonial.quote}"</p>
+                                    </div>,
+                                    <div className="folder-paper-content">
+                                        <span className="folder-name">{testimonial.name}</span>
+                                        <span className="folder-program">{testimonial.program}</span>
+                                    </div>,
+                                    <div className="folder-paper-content avatar">
+                                        <span>{testimonial.name.charAt(0)}</span>
+                                    </div>
+                                ]}
+                            />
+                        </AnimatedSection>
                     ))}
                 </div>
             </div>
