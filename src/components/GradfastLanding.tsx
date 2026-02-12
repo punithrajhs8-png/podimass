@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import './GradfastLanding.css';
 import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
+import UnicornStudioBackground from './UnicornStudioBackground';
+import ScrollVelocity from './ScrollVelocity';
+
 
 // ==================== SCROLL ANIMATION HOOK ====================
 const useScrollReveal = () => {
@@ -95,17 +98,24 @@ const Header: React.FC = () => {
     );
 };
 
+
+
 // ==================== HERO ====================
 const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
     return (
         <section className="hero">
+
             <div className="container hero-container">
                 <AnimatedSection className="hero-content">
-                    <h1 className="hero-title">
-                        Accelerate Your
-                        <br />
-                        <span className="hero-title-gradient">Degree Journey</span>
-                    </h1>
+                    <div className="hero-velocity-title">
+                        <ScrollVelocity
+                            texts={['Accelerate Your Degree Journey']}
+                            velocity={50}
+                            className="velocity-gradient-text"
+                            damping={50}
+                            stiffness={400}
+                        />
+                    </div>
 
                     <p className="hero-subtitle">
                         Complete your accredited degree faster through credit transfer and
@@ -147,6 +157,8 @@ const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
         </section>
     );
 };
+
+
 
 // ==================== BENTO GRID PROGRAMS ====================
 interface BentoCardProps {
@@ -301,13 +313,6 @@ const Process: React.FC = () => {
         { title: 'Graduate', description: 'Earn your accredited degree and step into your future with confidence.', icon: '🎓' },
     ];
 
-    const studyAbroadSteps = [
-        { title: 'Consultation', description: 'Discuss your goals and get personalized university recommendations.', icon: '💬' },
-        { title: 'Admission', description: 'We handle applications, SOPs, and secure admission offers.', icon: '🏫' },
-        { title: 'Visa Processing', description: 'Complete visa documentation and interview preparation support.', icon: '📋' },
-        { title: 'Fly Abroad', description: "Pre-departure briefing and you're ready for your global journey!", icon: '✈️' },
-    ];
-
     return (
         <section className="process section" id="process">
             <div className="section-glow section-glow--right" />
@@ -328,7 +333,7 @@ const Process: React.FC = () => {
                     </p>
                 </AnimatedSection>
 
-                <div className="process-tracks">
+                <div className="process-single">
                     <div className="process-track">
                         <div className="track-header">
                             <span className="track-icon">🎓</span>
@@ -337,24 +342,6 @@ const Process: React.FC = () => {
                         <div className="timeline">
                             <div className="timeline-line" />
                             {graduationSteps.map((step, index) => (
-                                <TimelineStep
-                                    key={index}
-                                    number={index + 1}
-                                    {...step}
-                                    delay={index * 100}
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="process-track">
-                        <div className="track-header">
-                            <span className="track-icon">✈️</span>
-                            <h3>Study Abroad</h3>
-                        </div>
-                        <div className="timeline">
-                            <div className="timeline-line" />
-                            {studyAbroadSteps.map((step, index) => (
                                 <TimelineStep
                                     key={index}
                                     number={index + 1}
@@ -407,9 +394,6 @@ const Testimonials: React.FC = () => {
         { quote: "Gradfast shortened my degree path without losing quality. I graduated a full year early!", name: "Priya Sharma", program: "Accelerated BA" },
         { quote: "The credit transfer process was seamless. I saved time and money while getting quality education.", name: "Rahul Kumar", program: "Credit Transfer" },
         { quote: "Online-to-campus blend gave me the flexibility I needed. The campus experience was worth it!", name: "Ananya Mehta", program: "Hybrid Program" },
-        { quote: "Gradfast secured my Canada admission and visa in record time. Now I'm living my dream!", name: "Aarav Malhotra", program: "Study Abroad - Canada" },
-        { quote: "The UK visa process seemed daunting, but Gradfast made it effortless. Highly recommend!", name: "Neha Kapoor", program: "Study Abroad - UK" },
-        { quote: "From SOP to visa stamp, the team was with me every step. Australia here I am!", name: "Vikram Singh", program: "Study Abroad - Australia" },
     ];
 
     return (
@@ -605,7 +589,11 @@ const GradfastLanding: React.FC = () => {
             easing="ease-out"
             extraScale={1.2}
         >
-            <div className="gradfast-app">
+            <div className={`gradfast-app ${currentPage === 'fasttrack' ? 'gradfast-app--fasttrack' : ''}`}>
+                {/* Animated background only for Fast Track page */}
+                {currentPage === 'fasttrack' && (
+                    <UnicornStudioBackground />
+                )}
                 <Header />
                 <main>
                     {currentPage === 'fasttrack' ? (
