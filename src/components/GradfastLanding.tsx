@@ -4,6 +4,7 @@ import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
 import Particles from './Particles';
 import SuccessStoriesModal from './SuccessStoriesModal';
+import SplitText from './SplitText';
 
 
 // ==================== SCROLL ANIMATION HOOK ====================
@@ -118,10 +119,15 @@ const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
                 disableRotation={false}
             />
             <div className="container hero-container">
-                <AnimatedSection className="hero-content">
-                    <h1 className="hero-title">
-                        Accelerate Your <span className="gradient-text">Degree Journey</span>
-                    </h1>
+                <div className="hero-content">
+                    <SplitText
+                        text="Accelerate Your Degree Journey"
+                        className="hero-title"
+                        tag="h1"
+                        delay={40}
+                        duration={1.2}
+                        ease="elastic.out(1, 0.5)"
+                    />
 
                     <p className="hero-subtitle">
                         Complete your accredited degree faster through credit transfer and
@@ -139,7 +145,7 @@ const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
                             ✈️ Study Abroad
                         </button>
                     </div>
-                </AnimatedSection>
+                </div>
 
                 <AnimatedSection className="hero-stats" delay={200}>
                     <div className="stat-card">
@@ -240,13 +246,13 @@ const Programs: React.FC = () => {
 
                 {/* Fast-Track Graduation Section */}
                 <div className="bento-section">
-                    <AnimatedSection className="bento-header">
+                <AnimatedSection className="bento-header">
                         <div className="bento-header-icon">🎓</div>
                         <div>
                             <h3 className="bento-header-title">Fast-Track Graduation</h3>
                             <p className="bento-header-subtitle">Accelerate your path to a degree</p>
                         </div>
-                    </AnimatedSection>
+                </AnimatedSection>
 
                     <div className="bento-grid bento-grid--graduation">
                         <BentoCard
