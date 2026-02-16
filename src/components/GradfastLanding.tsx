@@ -4,6 +4,8 @@ import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
 import Particles from './Particles';
 import BlurText from './BlurText';
+import InteractiveBackground from './InteractiveBackground';
+import './InteractiveBackground.css';
 
 
 // ==================== SCROLL ANIMATION HOOK ====================
@@ -182,32 +184,72 @@ const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
 
 
 // ==================== BENTO GRID PROGRAMS ====================
+// SVG Icon Component for Bento Cards
+const BentoSvgIcon: React.FC<{ type: string }> = ({ type }) => {
+    switch (type) {
+        case 'accelerated':
+            return (
+                <div className="bento-icon-svg bento-icon--accelerated">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="24,2 28,18 44,18 31,28 35,44 24,34 13,44 17,28 4,18 20,18" stroke="currentColor" strokeWidth="2" fill="none" className="bi-bolt-outer" />
+                        <path d="M22 14L18 26H24L20 38L32 22H24L28 14H22Z" fill="currentColor" className="bi-bolt" />
+                    </svg>
+                </div>
+            );
+        case 'credit':
+            return (
+                <div className="bento-icon-svg bento-icon--credit">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="4" y="10" width="40" height="28" rx="4" stroke="currentColor" strokeWidth="2.5" fill="none" className="bi-card" />
+                        <line x1="4" y1="20" x2="44" y2="20" stroke="currentColor" strokeWidth="2.5" className="bi-stripe" />
+                        <rect x="8" y="28" width="12" height="4" rx="1" fill="currentColor" opacity="0.3" className="bi-chip" />
+                        <path d="M30 26L34 30L42 22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="bi-check" />
+                    </svg>
+                </div>
+            );
+        case 'online':
+            return (
+                <div className="bento-icon-svg bento-icon--online">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="6" y="6" width="36" height="26" rx="3" stroke="currentColor" strokeWidth="2.5" fill="none" className="bi-screen" />
+                        <line x1="18" y1="38" x2="30" y2="38" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="bi-stand" />
+                        <line x1="24" y1="32" x2="24" y2="38" stroke="currentColor" strokeWidth="2.5" className="bi-neck" />
+                        <circle cx="24" cy="19" r="6" stroke="currentColor" strokeWidth="2" fill="none" className="bi-globe" />
+                        <path d="M18 19C18 19 20.5 15 24 15C27.5 15 30 19 30 19" stroke="currentColor" strokeWidth="1.5" className="bi-globe-line" />
+                        <line x1="24" y1="13" x2="24" y2="25" stroke="currentColor" strokeWidth="1.5" className="bi-globe-vert" />
+                        <line x1="18" y1="19" x2="30" y2="19" stroke="currentColor" strokeWidth="1.5" className="bi-globe-horiz" />
+                    </svg>
+                </div>
+            );
+        default:
+            return null;
+    }
+};
+
 interface BentoCardProps {
     title: string;
     description: string;
     features: string[];
-    icon: string;
+    iconType: string;
     gradient: string;
     size?: 'small' | 'medium' | 'large';
     delay?: number;
 }
 
 const BentoCard: React.FC<BentoCardProps> = ({
-    title, description, features, icon, gradient, size = 'medium', delay = 0
+    title, description, features, iconType, gradient, size = 'medium', delay = 0
 }) => {
     const { ref, isVisible } = useScrollReveal();
 
     return (
         <div
             ref={ref}
-            className={`bento-card bento-card--${size} ${isVisible ? 'is-visible' : ''}`}
+            className={`bento-card bento-card--${size} bento-card--${iconType} ${isVisible ? 'is-visible' : ''}`}
             style={{ animationDelay: `${delay}ms` }}
         >
             <div className="bento-card-glow" style={{ background: gradient }} />
             <div className="bento-card-content">
-                <div className="bento-icon" style={{ background: gradient }}>
-                    <span>{icon}</span>
-                </div>
+                <BentoSvgIcon type={iconType} />
                 <h3 className="bento-title">{title}</h3>
                 <p className="bento-description">{description}</p>
                 <ul className="bento-features">
@@ -255,20 +297,20 @@ const Programs: React.FC = () => {
 
                 {/* Fast-Track Graduation Section */}
                 <div className="bento-section">
-                <AnimatedSection className="bento-header">
+                    <AnimatedSection className="bento-header">
                         <div className="bento-header-icon">🎓</div>
                         <div>
                             <h3 className="bento-header-title">Fast-Track Graduation</h3>
                             <p className="bento-header-subtitle">Accelerate your path to a degree</p>
                         </div>
-                </AnimatedSection>
+                    </AnimatedSection>
 
                     <div className="bento-grid bento-grid--graduation">
                         <BentoCard
                             title="Accelerated BA"
                             description="Complete your bachelor's degree in less time with our intensive, accredited programs."
                             features={['2-3 Year Completion', 'Fully Accredited', 'Flexible Schedule']}
-                            icon="⚡"
+                            iconType="accelerated"
                             gradient="var(--gradient-cyan)"
                             size="large"
                             delay={0}
@@ -277,7 +319,7 @@ const Programs: React.FC = () => {
                             title="Credit Transfer"
                             description="Move your existing credits seamlessly to accelerate completion."
                             features={['Easy Evaluation', 'Partner Universities', 'Maximum Transfer']}
-                            icon="🔄"
+                            iconType="credit"
                             gradient="var(--gradient-primary)"
                             size="medium"
                             delay={100}
@@ -286,7 +328,7 @@ const Programs: React.FC = () => {
                             title="Online-to-Campus"
                             description="Start online and graduate with an on-campus experience."
                             features={['Hybrid Learning', 'Campus Immersion', 'Global Network']}
-                            icon="💻"
+                            iconType="online"
                             gradient="var(--gradient-gold)"
                             size="medium"
                             delay={200}
@@ -299,12 +341,63 @@ const Programs: React.FC = () => {
 };
 
 // ==================== PROCESS ====================
+// SVG Icon Components for Process Steps
+const ProcessIcon: React.FC<{ type: string }> = ({ type }) => {
+    switch (type) {
+        case 'apply':
+            return (
+                <div className="process-icon-wrapper process-icon--apply">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="6" width="28" height="36" rx="3" stroke="currentColor" strokeWidth="2.5" fill="none" className="icon-doc" />
+                        <line x1="16" y1="16" x2="32" y2="16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="icon-line icon-line-1" />
+                        <line x1="16" y1="22" x2="28" y2="22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="icon-line icon-line-2" />
+                        <line x1="16" y1="28" x2="24" y2="28" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="icon-line icon-line-3" />
+                        <path d="M30 32L34 36L42 26" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="icon-check" />
+                    </svg>
+                </div>
+            );
+        case 'evaluate':
+            return (
+                <div className="process-icon-wrapper process-icon--evaluate">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="12" stroke="currentColor" strokeWidth="2.5" fill="none" className="icon-lens" />
+                        <line x1="29" y1="29" x2="40" y2="40" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="icon-handle" />
+                        <circle cx="20" cy="20" r="5" fill="currentColor" opacity="0.15" className="icon-glow" />
+                        <path d="M15 18C16.5 14 19.5 13 23 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="icon-shine" />
+                    </svg>
+                </div>
+            );
+        case 'enroll':
+            return (
+                <div className="process-icon-wrapper process-icon--enroll">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="18" stroke="currentColor" strokeWidth="2.5" fill="none" className="icon-circle" />
+                        <path d="M14 24L21 31L34 17" stroke="#10b981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="icon-tick" />
+                    </svg>
+                </div>
+            );
+        case 'graduate':
+            return (
+                <div className="process-icon-wrapper process-icon--graduate">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="24,4 44,16 24,28 4,16" stroke="currentColor" strokeWidth="2.5" fill="none" className="icon-cap-top" />
+                        <line x1="36" y1="20" x2="36" y2="34" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="icon-tassel" />
+                        <circle cx="36" cy="36" r="2.5" fill="currentColor" className="icon-tassel-ball" />
+                        <path d="M12 20V32C12 32 18 38 24 38C30 38 36 32 36 32V20" stroke="currentColor" strokeWidth="2" fill="none" className="icon-cap-band" />
+                    </svg>
+                </div>
+            );
+        default:
+            return null;
+    }
+};
+
 const Process: React.FC = () => {
     const graduationSteps = [
-        { title: 'Apply Online', description: 'Submit your application with transcripts through our easy portal.', icon: '📝' },
-        { title: 'Academic Evaluation', description: 'We review your credits and create a personalized acceleration plan.', icon: '🔍' },
-        { title: 'Enroll', description: 'Complete enrollment and begin your accelerated academic journey.', icon: '✅' },
-        { title: 'Graduate', description: 'Earn your accredited degree and step into your future with confidence.', icon: '🎓' },
+        { title: 'Apply Online', description: 'Submit your application with transcripts through our easy portal.', iconType: 'apply' },
+        { title: 'Academic Evaluation', description: 'We review your credits and create a personalized acceleration plan.', iconType: 'evaluate' },
+        { title: 'Enroll', description: 'Complete enrollment and begin your accelerated academic journey.', iconType: 'enroll' },
+        { title: 'Graduate', description: 'Earn your accredited degree and step into your future with confidence.', iconType: 'graduate' },
     ];
 
     return (
@@ -331,7 +424,7 @@ const Process: React.FC = () => {
                     {graduationSteps.map((step, index) => (
                         <AnimatedSection key={index} delay={index * 100} className="process-rectangle-card">
                             <div className="process-rectangle-number">{index + 1}</div>
-                            <div className="process-rectangle-icon">{step.icon}</div>
+                            <ProcessIcon type={step.iconType} />
                             <h4 className="process-rectangle-title">{step.title}</h4>
                             <p className="process-rectangle-description">{step.description}</p>
                         </AnimatedSection>
@@ -376,7 +469,7 @@ const Testimonials: React.FC = () => {
                             </div>
                         </div>
                     </AnimatedSection>
-                    
+
                     <AnimatedSection delay={200}>
                         <div className="testimonial-card">
                             <div className="testimonial-quote-mark">"</div>
@@ -390,7 +483,7 @@ const Testimonials: React.FC = () => {
                             </div>
                         </div>
                     </AnimatedSection>
-                    
+
                     <AnimatedSection delay={300}>
                         <div className="testimonial-card">
                             <div className="testimonial-quote-mark">"</div>
@@ -499,6 +592,13 @@ const Footer: React.FC = () => {
                                 </svg>
                                 +91 99663 07111
                             </a>
+                            <a href="mailto:hello@gradfast.in" className="contact-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                                    <path d="M22 4L12 13L2 4" />
+                                </svg>
+                                hello@gradfast.in
+                            </a>
                             <span className="contact-link">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
@@ -600,9 +700,11 @@ const GradfastLanding: React.FC = () => {
                     {currentPage === 'fasttrack' ? (
                         <>
                             <Hero onSwitch={switchToAbroad} />
-                            <Programs />
-                            <Process />
-                            <Testimonials />
+                            <InteractiveBackground>
+                                <Programs />
+                                <Process />
+                                <Testimonials />
+                            </InteractiveBackground>
                             <CTA />
                         </>
                     ) : (
