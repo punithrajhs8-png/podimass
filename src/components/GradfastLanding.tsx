@@ -4,6 +4,7 @@ import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
 import Particles from './Particles';
 import SuccessStoriesModal from './SuccessStoriesModal';
+import BlurText from './BlurText';
 
 
 // ==================== SCROLL ANIMATION HOOK ====================
@@ -119,7 +120,22 @@ const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
             />
             <div className="container hero-container">
                 <div className="hero-content">
-                    <h1 className="hero-title"><span className="hero-title-orange">Accelerate Your</span> Degree Journey</h1>
+                    <div className="hero-title">
+                        <BlurText
+                            text="Accelerate Your"
+                            delay={200}
+                            animateBy="words"
+                            direction="top"
+                            className="hero-title-orange"
+                        />
+                        <BlurText
+                            text="Degree Journey"
+                            delay={200}
+                            animateBy="words"
+                            direction="top"
+                            className="hero-title-default"
+                        />
+                    </div>
 
                     <p className="hero-subtitle">
                         Complete your accredited degree faster through credit transfer and
