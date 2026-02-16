@@ -123,16 +123,18 @@ const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
                     <div className="hero-title">
                         <BlurText
                             text="Accelerate Your"
-                            delay={200}
+                            delay={80}
                             animateBy="words"
                             direction="top"
+                            stepDuration={0.15}
                             className="hero-title-orange"
                         />
                         <BlurText
                             text="Degree Journey"
-                            delay={200}
+                            delay={80}
                             animateBy="words"
                             direction="top"
+                            stepDuration={0.15}
                             className="hero-title-default"
                         />
                     </div>
