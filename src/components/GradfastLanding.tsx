@@ -3,7 +3,6 @@ import './GradfastLanding.css';
 import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
 import Particles from './Particles';
-import SuccessStoriesModal from './SuccessStoriesModal';
 import BlurText from './BlurText';
 
 
@@ -399,7 +398,6 @@ const Testimonials: React.FC = () => {
                     </p>
                 </AnimatedSection>
 
-                <SuccessStoriesModal />
             </div>
         </section>
     );
