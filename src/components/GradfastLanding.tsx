@@ -244,16 +244,10 @@ const Programs: React.FC = () => {
                         <span className="tag-dot" />
                         Fast Track Programs
                     </span>
-                    <ScrollFloat
-                        animationDuration={1}
-                        ease="back.inOut(2)"
-                        scrollStart="center bottom+=50%"
-                        scrollEnd="bottom bottom-=40%"
-                        stagger={0.03}
-                        textClassName="section-title"
-                    >
-                        A Simpler Way to Accelerate Your Degree
-                    </ScrollFloat>
+                    <h2 className="section-title">
+                        A Simpler Way to
+                        <span className="gradient-text"> Accelerate Your Degree</span>
+                    </h2>
                     <p className="section-subtitle">
                         Choose from accredited fast-track programs with credit transfer
                         and university-verified pathways to graduate faster.
@@ -351,16 +345,10 @@ const Process: React.FC = () => {
                         <span className="tag-dot" />
                         How It Works
                     </span>
-                    <ScrollFloat
-                        animationDuration={1}
-                        ease="back.inOut(2)"
-                        scrollStart="center bottom+=50%"
-                        scrollEnd="bottom bottom-=40%"
-                        stagger={0.03}
-                        textClassName="section-title"
-                    >
-                        Your Path to Success
-                    </ScrollFloat>
+                    <h2 className="section-title">
+                        Your Path to
+                        <span className="gradient-text"> Success</span>
+                    </h2>
                     <p className="section-subtitle">
                         A streamlined process designed to get you to graduation faster
                         and guide you every step of the way.
@@ -401,16 +389,10 @@ const Testimonials: React.FC = () => {
                         <span className="tag-dot" />
                         Success Stories
                     </span>
-                    <ScrollFloat
-                        animationDuration={1}
-                        ease="back.inOut(2)"
-                        scrollStart="center bottom+=50%"
-                        scrollEnd="bottom bottom-=40%"
-                        stagger={0.03}
-                        textClassName="section-title"
-                    >
-                        What Our Students Say
-                    </ScrollFloat>
+                    <h2 className="section-title">
+                        What Our Students
+                        <span className="gradient-text"> Say</span>
+                    </h2>
                     <p className="section-subtitle">
                         Real stories from students who accelerated their academic dreams
                         and achieved their global education goals.
