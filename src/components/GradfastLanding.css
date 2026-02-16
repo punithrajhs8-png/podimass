@@ -990,85 +990,466 @@
     color: var(--color-text-muted);
 }
 
-/* ==================== CTA ==================== */
-.cta {
-    background: transparent;
-    padding-bottom: 6rem;
-}
-
-.cta-card {
+/* ==================== CTA BANNER (ANIMATED) ==================== */
+.cta-banner {
     position: relative;
-    padding: 5rem;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
-    text-align: center;
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6600 30%, #f55800 60%, #e04800 100%);
+    background-size: 200% 200%;
+    animation: ctaGradientShift 8s ease infinite;
+    padding: 4.5rem 2rem;
     overflow: hidden;
+    text-align: center;
 }
 
-.cta-glow {
+/* Animated gradient background */
+@keyframes ctaGradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ---- Shimmer sweep ---- */
+.cta-banner-shimmer {
     position: absolute;
-    width: 400px;
-    height: 400px;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(105deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.08) 45%,
+            rgba(255, 255, 255, 0.15) 50%,
+            rgba(255, 255, 255, 0.08) 55%,
+            transparent 70%);
+    animation: ctaShimmer 5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes ctaShimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
+/* ---- Floating particles ---- */
+.cta-banner-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.cta-particle {
+    position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.25;
+    background: rgba(255, 255, 255, 0.15);
+    will-change: transform, opacity;
 }
 
-.cta-glow--1 {
-    top: -100px;
-    left: -100px;
-    background: var(--color-orange);
+.cta-particle--1 {
+    width: 8px;
+    height: 8px;
+    top: 20%;
+    left: 15%;
+    animation: ctaFloat 6s ease-in-out infinite;
 }
 
-.cta-glow--2 {
-    bottom: -100px;
-    right: -100px;
-    background: var(--color-purple);
+.cta-particle--2 {
+    width: 5px;
+    height: 5px;
+    top: 60%;
+    left: 25%;
+    animation: ctaFloat 8s ease-in-out infinite 1s;
 }
 
-.cta-content {
+.cta-particle--3 {
+    width: 10px;
+    height: 10px;
+    top: 30%;
+    right: 20%;
+    animation: ctaFloat 7s ease-in-out infinite 0.5s;
+}
+
+.cta-particle--4 {
+    width: 6px;
+    height: 6px;
+    top: 70%;
+    right: 10%;
+    animation: ctaFloat 5s ease-in-out infinite 2s;
+}
+
+.cta-particle--5 {
+    width: 4px;
+    height: 4px;
+    top: 15%;
+    right: 35%;
+    animation: ctaFloat 9s ease-in-out infinite 1.5s;
+}
+
+.cta-particle--6 {
+    width: 7px;
+    height: 7px;
+    bottom: 20%;
+    left: 45%;
+    animation: ctaFloat 6.5s ease-in-out infinite 0.8s;
+}
+
+@keyframes ctaFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.3);
+        opacity: 0.7;
+    }
+}
+
+/* ---- Animated section wrapper ---- */
+.cta-banner .animated-section {
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.cta-tag {
+/* ---- Decorative circles ---- */
+.cta-banner-decor {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.cta-banner-decor--left {
+    left: -40px;
+}
+
+.cta-banner-decor--right {
+    right: -60px;
+}
+
+.cta-banner-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    will-change: transform;
+}
+
+.cta-banner-circle--lg {
+    width: 180px;
+    height: 180px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: transparent;
+    animation: ctaPulseLg 4s ease-in-out infinite;
+}
+
+.cta-banner-circle--md {
+    width: 120px;
+    height: 120px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: transparent;
+    animation: ctaPulseMd 4s ease-in-out infinite 0.5s;
+}
+
+.cta-banner-circle--sm {
+    width: 64px;
+    height: 64px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    animation: ctaPulseSm 3s ease-in-out infinite 1s;
+}
+
+/* Slow spin for right-side circles */
+.cta-banner-decor--right .cta-banner-circle--lg {
+    animation: ctaSpinSlow 20s linear infinite;
+}
+
+.cta-banner-decor--right .cta-banner-circle--md {
+    animation: ctaSpinSlow 15s linear infinite reverse;
+}
+
+@keyframes ctaPulseLg {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+}
+
+@keyframes ctaPulseMd {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+@keyframes ctaPulseSm {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.12);
+        opacity: 1;
+    }
+}
+
+@keyframes ctaSpinSlow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---- Graduation cap float ---- */
+.cta-banner-cap {
+    font-size: 1.6rem;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
     display: inline-block;
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-full);
-    box-shadow: var(--shadow-sm);
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-gold);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 1.5rem;
+    animation: ctaCapFloat 3s ease-in-out infinite;
 }
 
-.cta-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    margin-bottom: 1rem;
-    color: var(--color-text-primary);
+@keyframes ctaCapFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-6px) rotate(-5deg);
+    }
+
+    75% {
+        transform: translateY(4px) rotate(5deg);
+    }
 }
 
-.cta-subtitle {
-    font-size: 1.15rem;
-    color: var(--color-text-secondary);
-    max-width: 600px;
-    margin: 0 auto 2.5rem;
+/* ---- Content entrance stagger ---- */
+.cta-banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
-.cta-buttons {
+.cta-banner .is-visible .cta-banner-title {
+    animation: ctaSlideUp 0.7s ease-out both;
+}
+
+.cta-banner .is-visible .cta-banner-subtitle {
+    animation: ctaSlideUp 0.7s ease-out 0.15s both;
+}
+
+.cta-banner .is-visible .cta-banner-buttons {
+    animation: ctaSlideUp 0.7s ease-out 0.3s both;
+}
+
+@keyframes ctaSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- Title ---- */
+.cta-banner-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+
+/* ---- Subtitle ---- */
+.cta-banner-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* ---- Buttons container ---- */
+.cta-banner-buttons {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
+}
+
+/* ---- Base button ---- */
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 999px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Primary button */
+.cta-btn--primary {
+    background: #fff;
+    color: #e05500;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.15);
+    animation: ctaBtnGlow 2.5s ease-in-out infinite;
+}
+
+.cta-btn--primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -75%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(105deg,
+            transparent 40%,
+            rgba(255, 140, 0, 0.12) 50%,
+            transparent 60%);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+
+.cta-btn--primary:hover::after {
+    left: 125%;
+}
+
+.cta-btn--primary:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18), 0 0 30px rgba(255, 255, 255, 0.25);
+}
+
+/* Arrow bounce on primary button */
+.cta-btn--primary svg {
+    transition: transform 0.3s ease;
+}
+
+.cta-btn--primary:hover svg {
+    animation: ctaArrowBounce 0.6s ease infinite;
+}
+
+@keyframes ctaArrowBounce {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+@keyframes ctaBtnGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), 0 0 30px rgba(255, 255, 255, 0.25);
+    }
+}
+
+/* Outline button */
+.cta-btn--outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    animation: ctaOutlinePulse 3s ease-in-out infinite;
+}
+
+.cta-btn--outline:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+}
+
+@keyframes ctaOutlinePulse {
+
+    0%,
+    100% {
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        border-color: rgba(255, 255, 255, 0.85);
+    }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+
+    .cta-banner,
+    .cta-banner-shimmer,
+    .cta-particle,
+    .cta-banner-circle,
+    .cta-banner-cap,
+    .cta-btn--primary,
+    .cta-btn--outline {
+        animation: none !important;
+    }
+
+    .cta-banner {
+        background-size: 100% 100%;
+    }
 }
 
 /* ==================== FOOTER ==================== */
@@ -1269,12 +1650,16 @@
         font-size: 2rem;
     }
 
-    .cta-card {
-        padding: 2.5rem 1.5rem;
+    .cta-banner {
+        padding: 3rem 1.5rem;
     }
 
-    .cta-buttons {
+    .cta-banner-buttons {
         flex-direction: column;
+    }
+
+    .cta-banner-decor {
+        display: none;
     }
 
     .footer-grid {

@@ -413,38 +413,61 @@ const Testimonials: React.FC = () => {
 // ==================== CTA ====================
 const CTA: React.FC = () => {
     return (
-        <section className="cta section" id="contact">
-            <div className="container">
-                <AnimatedSection>
-                    <div className="cta-card">
-                        <div className="cta-glow cta-glow--1" />
-                        <div className="cta-glow cta-glow--2" />
-                        <div className="cta-content">
-                            <span className="cta-tag">Ready to Start?</span>
-                            <h2 className="cta-title">
-                                Fast-Track Your Degree
-                                <br />
-                                <span className="gradient-text">Go Global with Gradfast</span>
-                            </h2>
-                            <p className="cta-subtitle">
-                                Take the first step towards your accelerated graduation today.
-                                Personalized planning for students and families.
-                            </p>
-                            <div className="cta-buttons">
-                                <a href="/contact" className="btn btn-primary btn-xl btn-glow">
-                                    <span>Book Free Consultation</span>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M5 12h14M12 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                                <a href="/universities" className="btn btn-outline btn-xl">
-                                    See Partner Universities
-                                </a>
+        <section className="cta-banner" id="contact">
+            {/* Animated background shimmer */}
+            <div className="cta-banner-shimmer" />
+
+            {/* Floating particles */}
+            <div className="cta-banner-particles">
+                <div className="cta-particle cta-particle--1" />
+                <div className="cta-particle cta-particle--2" />
+                <div className="cta-particle cta-particle--3" />
+                <div className="cta-particle cta-particle--4" />
+                <div className="cta-particle cta-particle--5" />
+                <div className="cta-particle cta-particle--6" />
+            </div>
+
+            <AnimatedSection>
+                {/* Decorative graduation cap circles — LEFT */}
+                <div className="cta-banner-decor cta-banner-decor--left">
+                    <div className="cta-banner-circle cta-banner-circle--lg">
+                        <div className="cta-banner-circle cta-banner-circle--md">
+                            <div className="cta-banner-circle cta-banner-circle--sm">
+                                <span className="cta-banner-cap">🎓</span>
                             </div>
                         </div>
                     </div>
-                </AnimatedSection>
-            </div>
+                </div>
+
+                {/* Decorative circles — RIGHT */}
+                <div className="cta-banner-decor cta-banner-decor--right">
+                    <div className="cta-banner-circle cta-banner-circle--lg">
+                        <div className="cta-banner-circle cta-banner-circle--md">
+                            <div className="cta-banner-circle cta-banner-circle--sm" />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="cta-banner-content">
+                    <h2 className="cta-banner-title">
+                        Ready to Fast-Track Your Degree?
+                    </h2>
+                    <p className="cta-banner-subtitle">
+                        Take the first step towards your accelerated graduation today.
+                    </p>
+                    <div className="cta-banner-buttons">
+                        <a href="/contact" className="cta-btn cta-btn--primary">
+                            <span>Start Your Journey</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <a href="/contact" className="cta-btn cta-btn--outline">
+                            Talk to Advisor
+                        </a>
+                    </div>
+                </div>
+            </AnimatedSection>
         </section>
     );
 };
