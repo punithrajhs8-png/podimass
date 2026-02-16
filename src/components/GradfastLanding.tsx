@@ -298,34 +298,7 @@ const Programs: React.FC = () => {
     );
 };
 
-// ==================== PROCESS TIMELINE ====================
-interface TimelineStepProps {
-    number: number;
-    title: string;
-    description: string;
-    icon: string;
-    delay: number;
-}
-
-const TimelineStep: React.FC<TimelineStepProps> = ({ number, title, description, icon, delay }) => {
-    const { ref, isVisible } = useScrollReveal();
-
-    return (
-        <div
-            ref={ref}
-            className={`timeline-step ${isVisible ? 'is-visible' : ''}`}
-            style={{ animationDelay: `${delay}ms` }}
-        >
-            <div className="timeline-number">{number}</div>
-            <div className="timeline-content">
-                <div className="timeline-icon">{icon}</div>
-                <h4 className="timeline-title">{title}</h4>
-                <p className="timeline-description">{description}</p>
-            </div>
-        </div>
-    );
-};
-
+// ==================== PROCESS ====================
 const Process: React.FC = () => {
     const graduationSteps = [
         { title: 'Apply Online', description: 'Submit your application with transcripts through our easy portal.', icon: '📝' },
@@ -354,24 +327,15 @@ const Process: React.FC = () => {
                     </p>
                 </AnimatedSection>
 
-                <div className="process-single">
-                    <div className="process-track">
-                        <div className="track-header">
-                            <span className="track-icon">🎓</span>
-                            <h3>Fast-Track Graduation</h3>
-                        </div>
-                        <div className="timeline">
-                            <div className="timeline-line" />
-                            {graduationSteps.map((step, index) => (
-                                <TimelineStep
-                                    key={index}
-                                    number={index + 1}
-                                    {...step}
-                                    delay={index * 100}
-                                />
-                            ))}
-                        </div>
-                    </div>
+                <div className="process-rectangles">
+                    {graduationSteps.map((step, index) => (
+                        <AnimatedSection key={index} delay={index * 100} className="process-rectangle-card">
+                            <div className="process-rectangle-number">{index + 1}</div>
+                            <div className="process-rectangle-icon">{step.icon}</div>
+                            <h4 className="process-rectangle-title">{step.title}</h4>
+                            <p className="process-rectangle-description">{step.description}</p>
+                        </AnimatedSection>
+                    ))}
                 </div>
             </div>
         </section>
