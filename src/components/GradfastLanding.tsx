@@ -4,7 +4,6 @@ import ClickSpark from './ClickSpark';
 import StudyAbroadPage from './StudyAbroadPage';
 import Particles from './Particles';
 import BlurText from './BlurText';
-import ScrollFloat from './ScrollFloat';
 
 
 // ==================== SCROLL ANIMATION HOOK ====================
