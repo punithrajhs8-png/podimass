@@ -241,6 +241,10 @@
     text-align: center;
 }
 
+.hero-title-orange {
+    color: #ff7b00;
+}
+
 .hero-title-gradient {
     display: block;
     background: var(--gradient-text);

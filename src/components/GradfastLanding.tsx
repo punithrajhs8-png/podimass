@@ -119,7 +119,7 @@ const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
             />
             <div className="container hero-container">
                 <div className="hero-content">
-                    <h1 className="hero-title">Accelerate Your Degree Journey</h1>
+                    <h1 className="hero-title"><span className="hero-title-orange">Accelerate Your</span> Degree Journey</h1>
 
                     <p className="hero-subtitle">
                         Complete your accredited degree faster through credit transfer and
