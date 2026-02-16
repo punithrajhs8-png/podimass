@@ -398,6 +398,49 @@ const Testimonials: React.FC = () => {
                     </p>
                 </AnimatedSection>
 
+                <div className="testimonials-grid">
+                    <AnimatedSection delay={100}>
+                        <div className="testimonial-card">
+                            <div className="testimonial-quote-mark">"</div>
+                            <p className="testimonial-quote">Gradfast shortened my degree path without losing quality. I graduated a full year early!</p>
+                            <div className="testimonial-author">
+                                <div className="testimonial-avatar">P</div>
+                                <div className="testimonial-info">
+                                    <span className="testimonial-name">Priya Sharma</span>
+                                    <span className="testimonial-program">Accelerated BA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </AnimatedSection>
+                    
+                    <AnimatedSection delay={200}>
+                        <div className="testimonial-card">
+                            <div className="testimonial-quote-mark">"</div>
+                            <p className="testimonial-quote">The credit transfer process was seamless. I saved time and money while getting quality education.</p>
+                            <div className="testimonial-author">
+                                <div className="testimonial-avatar">R</div>
+                                <div className="testimonial-info">
+                                    <span className="testimonial-name">Rahul Kumar</span>
+                                    <span className="testimonial-program">Credit Transfer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </AnimatedSection>
+                    
+                    <AnimatedSection delay={300}>
+                        <div className="testimonial-card">
+                            <div className="testimonial-quote-mark">"</div>
+                            <p className="testimonial-quote">Online-to-campus blend gave me the flexibility I needed. The campus experience was worth it!</p>
+                            <div className="testimonial-author">
+                                <div className="testimonial-avatar">A</div>
+                                <div className="testimonial-info">
+                                    <span className="testimonial-name">Ananya Mehta</span>
+                                    <span className="testimonial-program">Hybrid Program</span>
+                                </div>
+                            </div>
+                        </div>
+                    </AnimatedSection>
+                </div>
             </div>
         </section>
     );
