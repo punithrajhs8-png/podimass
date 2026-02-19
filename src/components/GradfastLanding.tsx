@@ -102,6 +102,79 @@ const Header: React.FC = () => {
 
 
 
+// ==================== COUNT-UP STAT CARD ====================
+interface CountUpStatProps {
+    end: number;
+    suffix: string;
+    label: string;
+    delay?: number;
+    accentColor: string;
+}
+
+const CountUpStat: React.FC<CountUpStatProps> = ({ end, suffix, label, delay = 0, accentColor }) => {
+    const [count, setCount] = useState(0);
+    const [hasAnimated, setHasAnimated] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    setHasAnimated(true);
+                    // Start count-up after stagger delay
+                    setTimeout(() => {
+                        const duration = 1000;
+                        const startTime = performance.now();
+
+                        const animate = (currentTime: number) => {
+                            const elapsed = currentTime - startTime;
+                            const progress = Math.min(elapsed / duration, 1);
+
+                            // Ease out expo for smooth deceleration
+                            const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                            setCount(Math.floor(eased * end));
+
+                            if (progress < 1) {
+                                requestAnimationFrame(animate);
+                            }
+                        };
+
+                        requestAnimationFrame(animate);
+                    }, delay);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (cardRef.current) {
+            observer.observe(cardRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [end, delay, hasAnimated]);
+
+    return (
+        <div
+            ref={cardRef}
+            className={`stat-card ${hasAnimated ? 'stat-card--visible' : ''} ${isHovered ? 'stat-card--hovered' : ''}`}
+            style={{
+                '--accent-color': accentColor,
+                '--stagger-delay': `${delay}ms`,
+            } as React.CSSProperties}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+
+            <span className="stat-value">
+                {count}{suffix}
+            </span>
+            <span className="stat-label">{label}</span>
+            <div className="stat-card-glow" />
+        </div>
+    );
+};
+
 // ==================== HERO ====================
 const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
     return (
@@ -158,24 +231,12 @@ const Hero: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
                     </div>
                 </div>
 
-                <AnimatedSection className="hero-stats" delay={200}>
-                    <div className="stat-card">
-                        <span className="stat-value">10K+</span>
-                        <span className="stat-label">Graduates</span>
-                    </div>
-                    <div className="stat-card">
-                        <span className="stat-value">50+</span>
-                        <span className="stat-label">Universities</span>
-                    </div>
-                    <div className="stat-card">
-                        <span className="stat-value">15+</span>
-                        <span className="stat-label">Countries</span>
-                    </div>
-                    <div className="stat-card">
-                        <span className="stat-value">98%</span>
-                        <span className="stat-label">Success Rate</span>
-                    </div>
-                </AnimatedSection>
+                <div className="hero-stats">
+                    <CountUpStat end={10} suffix="K+" label="Graduates" delay={0} accentColor="#f97316" />
+                    <CountUpStat end={50} suffix="+" label="Universities" delay={80} accentColor="#ea580c" />
+                    <CountUpStat end={15} suffix="+" label="Countries" delay={160} accentColor="#f59e0b" />
+                    <CountUpStat end={98} suffix="%" label="Success Rate" delay={240} accentColor="#ef4444" />
+                </div>
             </div>
         </section>
     );
